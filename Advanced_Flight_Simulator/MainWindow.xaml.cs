@@ -16,7 +16,7 @@ using System.Windows.Shapes;
 using System.Net;
 using System.Net.Sockets;
 using System.IO;
-
+using System.Threading;
 
 namespace Advanced_Flight_Simulator
 {
@@ -35,28 +35,17 @@ namespace Advanced_Flight_Simulator
             try
             {
                 Console.WriteLine("Start all");
-                IPAddress ipAd = IPAddress.Parse("127.0.0.1");
-                // use local m/c IP address, and 
-                // use the same in the client
+                int port =5400;
+                string host = "127.0.0.1";
+                Socket s = new Socket(AddressFamily.InterNetwork,
+                     SocketType.Stream, ProtocolType.Tcp);
 
-                /* Initializes the Listener */
-                TcpListener myList = new TcpListener(ipAd, 5400);
-
-                /* Start Listeneting at the specified port */
-                myList.Start(5);
-
-                Console.WriteLine("The server is running at port 8001...");
-                Console.WriteLine("The local End point is  :" +
-                                  myList.LocalEndpoint);
-                Console.WriteLine("Waiting for a connection.....");
-
-                Socket s = myList.AcceptSocket();
+                Console.WriteLine("Establishing Connection to {0}",
+                    host);
+                s.Connect(host, port);
+                Console.WriteLine("Connection established");
                 Console.WriteLine("Connection accepted from " + s.RemoteEndPoint);
 
-                byte[] b = new byte[100];
-                int k = s.Receive(b);
-                Console.WriteLine(k);
-                Console.WriteLine("Recieved...");
 
                 string fileName = "C:/Users/adamp/source/repos/Advanced_Flight_Simulator/Advanced_Flight_Simulator/reg_flight.csv";
                 using (var reader = new StreamReader(fileName))
@@ -70,22 +59,11 @@ namespace Advanced_Flight_Simulator
                         Console.WriteLine(msg);
                         Console.WriteLine(line);
                         Console.WriteLine("End send");
-                        System.Threading.Thread.Sleep(100);
+                        Thread.Sleep(100);
 
 
                     }
                 }
-
-
-
-
-
-                ASCIIEncoding asen = new ASCIIEncoding();
-                s.Send(asen.GetBytes("The string was recieved by the server."));
-                Console.WriteLine("\nSent Acknowledgement");
-                /* clean up */
-                s.Close();
-                myList.Stop();
 
             }
             catch (Exception e1)
