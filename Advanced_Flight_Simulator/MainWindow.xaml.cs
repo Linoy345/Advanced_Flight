@@ -25,51 +25,95 @@ namespace Advanced_Flight_Simulator
     /// </summary>
     public partial class MainWindow : Window
     {
+      
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender1, RoutedEventArgs e)
         {
+
             try
             {
-                Console.WriteLine("Start all");
-                int port =5400;
-                string host = "127.0.0.1";
-                Socket s = new Socket(AddressFamily.InterNetwork,
-                     SocketType.Stream, ProtocolType.Tcp);
+                string server = "127.0.0.1";
+                Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                System.Net.IPAddress ipAdd = System.Net.IPAddress.Parse(server);
+                System.Net.IPEndPoint remoteEP = new IPEndPoint(ipAdd, 5400);
+                soc.Connect(remoteEP);
 
-                Console.WriteLine("Establishing Connection to {0}",
-                    host);
-                s.Connect(host, port);
-                Console.WriteLine("Connection established");
-                Console.WriteLine("Connection accepted from " + s.RemoteEndPoint);
-
-
-                string fileName = "C:/Users/adamp/source/repos/Advanced_Flight_Simulator/Advanced_Flight_Simulator/reg_flight.csv";
-                using (var reader = new StreamReader(fileName))
+                try
                 {
-                    string line;
-                    while ((line = reader.ReadLine()) != null)
+
+                 
+
+                    // We print EndPoint information 
+                    // that we are connected
+                    Console.WriteLine("Socket connected to");
+
+                    string fileName = "reg_flight.csv";
+                    using (var reader = new StreamReader(fileName))
                     {
-                        Console.WriteLine("Start send");
-                        byte[] msg = System.Text.Encoding.ASCII.GetBytes(line);
-                        s.Send(msg);
-                        Console.WriteLine(msg);
-                        Console.WriteLine(line);
-                        Console.WriteLine("End send");
-                        Thread.Sleep(100);
-
-
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            // Creation of messagge that
+                            // we will send to Server
+                            line += "\r\n";
+                            byte[] messageSent = Encoding.ASCII.GetBytes(line);
+                            int byteSent = soc.Send(messageSent);
+                            Console.WriteLine(line);
+                            Thread.Sleep(100);
+                        }
                     }
+
+
+
+                    // Data buffer
+                    byte[] messageReceived = new byte[1024];
+
+                    // We receive the messagge using 
+                    // the method Receive(). This 
+                    // method returns number of bytes
+                    // received, that we'll use to 
+                    // convert them to string
+                    int byteRecv = soc.Receive(messageReceived);
+                    Console.WriteLine("Message from Server -> {0}",
+                          Encoding.ASCII.GetString(messageReceived,
+                                                     0, byteRecv));
+
+                    // Close Socket using 
+                    // the method Close()
+                    soc.Shutdown(SocketShutdown.Both);
+                    soc.Close();
                 }
 
+                // Manage of Socket's Exceptions
+                catch (ArgumentNullException ane)
+                {
+
+                    Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                }
+
+                catch (SocketException se)
+                {
+
+                    Console.WriteLine("SocketException : {0}", se.ToString());
+                }
+
+                catch (Exception e2)
+                {
+                    Console.WriteLine("Unexpected exception : {0}", e2.ToString());
+                }
             }
+
             catch (Exception e1)
             {
-                Console.WriteLine("Error..... " + e1.StackTrace);
+
+                Console.WriteLine(e1.ToString());
             }
         }
+
     }
 }
