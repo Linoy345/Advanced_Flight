@@ -25,6 +25,8 @@ namespace Advanced_Flight_Simulator
     /// </summary>
     public partial class MainWindow : Window
     {
+      
+
         public MainWindow()
         {
             InitializeComponent();
@@ -32,15 +34,86 @@ namespace Advanced_Flight_Simulator
 
         private void Button_Click(object sender1, RoutedEventArgs e)
         {
-            Model_Server server = new Model_Server();
-            server.connect("127.0.0.1", 5400);
-            Thread sending = new Thread(server.send);
-            sending.Start();
+
+            try
+            {
+                string server = "127.0.0.1";
+                Socket soc = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                System.Net.IPAddress ipAdd = System.Net.IPAddress.Parse(server);
+                System.Net.IPEndPoint remoteEP = new IPEndPoint(ipAdd, 5400);
+                soc.Connect(remoteEP);
+
+                try
+                {
+
+                 
+
+                    // We print EndPoint information 
+                    // that we are connected
+                    Console.WriteLine("Socket connected to");
+
+                    string fileName = "reg_flight.csv";
+                    using (var reader = new StreamReader(fileName))
+                    {
+                        string line;
+                        while ((line = reader.ReadLine()) != null)
+                        {
+                            // Creation of messagge that
+                            // we will send to Server
+                            line += "\r\n";
+                            byte[] messageSent = Encoding.ASCII.GetBytes(line);
+                            int byteSent = soc.Send(messageSent);
+                            Console.WriteLine(line);
+                            Thread.Sleep(100);
+                        }
+                    }
+
+
+
+                    // Data buffer
+                    byte[] messageReceived = new byte[1024];
+
+                    // We receive the messagge using 
+                    // the method Receive(). This 
+                    // method returns number of bytes
+                    // received, that we'll use to 
+                    // convert them to string
+                    int byteRecv = soc.Receive(messageReceived);
+                    Console.WriteLine("Message from Server -> {0}",
+                          Encoding.ASCII.GetString(messageReceived,
+                                                     0, byteRecv));
+
+                    // Close Socket using 
+                    // the method Close()
+                    soc.Shutdown(SocketShutdown.Both);
+                    soc.Close();
+                }
+
+                // Manage of Socket's Exceptions
+                catch (ArgumentNullException ane)
+                {
+
+                    Console.WriteLine("ArgumentNullException : {0}", ane.ToString());
+                }
+
+                catch (SocketException se)
+                {
+
+                    Console.WriteLine("SocketException : {0}", se.ToString());
+                }
+
+                catch (Exception e2)
+                {
+                    Console.WriteLine("Unexpected exception : {0}", e2.ToString());
+                }
+            }
+
+            catch (Exception e1)
+            {
+
+                Console.WriteLine(e1.ToString());
+            }
         }
 
-        private void slidey_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            
-        }
     }
 }

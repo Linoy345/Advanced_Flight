@@ -8,7 +8,6 @@
         Title="MainWindow" Height="600" Width="900">
     <Grid>
         <Button Content="Play&#xD;&#xA;" HorizontalAlignment="Left" Margin="64,498,0,0" VerticalAlignment="Top" Width="76" RenderTransformOrigin="-3.368,15.425" Click="Button_Click"/>
-        <Slider x:Name="slidey"  Minimum="100" Maximum="600" HorizontalAlignment="Left" Margin="190,365,0,0" VerticalAlignment="Top" Width="255" ValueChanged="slidey_ValueChanged"/>
 
     </Grid>
 </Window>
