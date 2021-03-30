@@ -33,13 +33,17 @@ namespace Advanced_Flight_Simulator
         }
 
         private void Button_Click(object sender1, RoutedEventArgs e)
-        {
+        {   
+            
+            ContinueWindow continueWindow = new ContinueWindow();
+            continueWindow.Show();
             int port = 5400;
             string ip = "127.0.0.1";
             Model_Server server = new Model_Server();
             server.connect(ip, port);
             Thread serverT = new Thread(server.send);
             serverT.Start();
+
         }
 
     }
