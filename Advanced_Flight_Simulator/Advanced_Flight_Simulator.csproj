@@ -55,11 +55,18 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Joistic.xaml.cs">
+      <DependentUpon>Joistic.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Model_Server.cs" />
     <Compile Include="Server.cs" />
     <Compile Include="ContinueWindow.xaml.cs">
       <DependentUpon>ContinueWindow.xaml</DependentUpon>
     </Compile>
+    <Page Include="Joistic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

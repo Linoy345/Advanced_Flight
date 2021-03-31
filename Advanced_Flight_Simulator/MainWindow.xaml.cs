@@ -43,6 +43,7 @@ namespace Advanced_Flight_Simulator
             server.connect(ip, port);
             Thread serverT = new Thread(server.send);
             serverT.Start();
+            this.Close();
 
         }
 

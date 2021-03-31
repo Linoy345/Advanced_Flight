@@ -45,3 +45,6 @@ C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\D
 C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.csproj.CoreCompileInputs.cache
 C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.exe
 C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.pdb
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Joistic.g.cs
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Joistic.baml
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\GeneratedInternalTypeHelper.g.cs

@@ -21,7 +21,8 @@ namespace Advanced_Flight_Simulator
     {
         public ContinueWindow()
         {
-            InitializeComponent(); //call it from mainWindow
+            InitializeComponent(); //call it from mainWindow.
+            
         }
     }
 }
