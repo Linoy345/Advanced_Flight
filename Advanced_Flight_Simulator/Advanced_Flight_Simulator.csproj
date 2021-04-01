@@ -55,11 +55,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Attribute.cs" />
+    <Compile Include="Flight_Info.cs" />
     <Compile Include="Joistic.xaml.cs">
       <DependentUpon>Joistic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model_Server.cs" />
-    <Compile Include="Server.cs" />
     <Compile Include="ContinueWindow.xaml.cs">
       <DependentUpon>ContinueWindow.xaml</DependentUpon>
     </Compile>
@@ -85,6 +85,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Model_Flight_Client.cs" />
+    <Compile Include="Model_IClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

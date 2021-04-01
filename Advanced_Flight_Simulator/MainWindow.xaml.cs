@@ -39,11 +39,7 @@ namespace Advanced_Flight_Simulator
             continueWindow.Show();
             int port = 5400;
             string ip = "127.0.0.1";
-            Model_Server server = new Model_Server();
-            server.connect(ip, port);
-            Thread serverT = new Thread(server.send);
-            serverT.Start();
-            this.Close();
+
 
         }
 
