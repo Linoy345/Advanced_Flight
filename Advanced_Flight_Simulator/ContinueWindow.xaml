@@ -9,6 +9,23 @@
 
         Title="ContinueWindow" Height="600" Width="900">
     <Grid x:Name="Joistoc">
-        <local:Joistic Margin="272,9,266.6,216.4"  />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <local:Joistic Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="3" Grid.RowSpan="4" HorizontalAlignment="Right" VerticalAlignment="Top" />
+        <local:Controls Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="6" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Top" />
     </Grid>
 </Window>
