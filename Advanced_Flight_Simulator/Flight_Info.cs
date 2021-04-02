@@ -3,19 +3,27 @@ using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 namespace Advanced_Flight_Simulator
 {
+    /*
+     * Handle Flight information- support different queries to extract data from specific attribute or specifiec row.
+     * Require csv(for data) and xml(for headers) paths.
+     */
     class Flight_Info
     {
-        //private List<Attribute> attributes;
-        public DataTable data_t;
-        public Flight_Info(string csv_path, string xml_path)
+        private List<Attribute> attributes;
+        private List<Dictionary<string, string>> rows; // Keep rows in list- each row is a dictionary- key is attribute name.
+        public Flight_Info()
         {
-            data_t = new DataTable();
-            //attributes = new List<Attribute>();
+            rows = new List<Dictionary<string, string>>();
+            attributes = new List<Attribute>();
+        }
+        /*
+         * Extract data from csv and xml files using thier paths.
+         */
+        public void init_Flight_Info(string csv_path, string xml_path)
+        {
             extract_headers(xml_path);
             extract_values(csv_path);
         }
@@ -29,57 +37,71 @@ namespace Advanced_Flight_Simulator
             IEnumerable<string> query = Xelement.Descendants("output").Descendants("name").Select(name => (string) name);
             foreach(var name in query.ToList())
             {
-                if (data_t.Columns.Contains(name))
-                {
-                    data_t.Columns.Add(new DataColumn(name + "first"));
-                } else {
-                    data_t.Columns.Add(new DataColumn(name));
-                }
-                //attributes.Add(new Attribute(name));
+                    attributes.Add(new Attribute(name));
             }
         }
         /*
-         * Extract values into attributes from a path to a CSV file.
+         * Extract values into attributes and rows from a path to a CSV file.
          */
         private void extract_values(string csv_path)
         {
             string[] lines = File.ReadAllLines(csv_path);
-            //int index = 0;
-                foreach(var line in lines)
-                {
-                DataRow new_row = data_t.NewRow();
-                //new_row.ItemArray(line.Split(','));
-                //List<string> current_line = line.Split(',').ToList();
-                data_t.Rows.Add((line.Split(',')));
-                //foreach (var value in current_line)
-                //{
-                //    attributes[index].add_value(value);
-                //    index++;
-                //}
-                //index = 0;
-                }
-        }
-        public DataColumn get_attribute(string att_name)
-        {
-            foreach(DataColumn column in this.data_t.Columns)
+            int coulumn_index = 0;
+            int row_index = 0;
+            string current_value;
+            string current_name;
+
+            foreach (var line in lines)
             {
-                if(column.ColumnName == att_name)
+                rows.Add(new Dictionary<string, string>());
+                string[] current_line = line.Split(',');
+                foreach (var attribute in attributes)
                 {
-                    return column;
+                    current_name = attribute.name;
+                    if (rows[row_index].ContainsKey(attribute.name)) {
+                        current_name += "2"; }; // Add 2 to name if two attributes have the same name
+                    current_value = current_line[coulumn_index].ToString();
+                    attribute.add_value(current_value);
+                    rows[row_index].Add(current_name, current_value);
+                    coulumn_index++;
+                }
+                coulumn_index = 0;
+                row_index++;
+            }
+        }
+
+        public List<string> get_attribute(string att_name)
+        {
+            foreach (var attribute in this.attributes)
+            {
+                if (attribute.name == att_name)
+                {
+                    return attribute.get_values();
                 }
             }
-            return this.data_t.Columns[att_name];
-            //foreach(var att in attributes)
-            //{
-            //    if(att.name == att_name) { return att.name; }
-            //}
-            //return String.Empty;
+            return new List<string>();
         }
-        public int get_row_size()
+        public Dictionary<string,string> get_row(int row)
         {
-            return this.data_t.Rows.Count;
-            //return this.attributes[0].get_size();
+            return this.rows[row];
         }
+
+        /*
+         * Convert given row values into a single string wheres each value is seperated by ",".
+         */
+        public string get_row_string(int row)
+        {
+            return string.Join(",", rows[row].Select(x => x.Value).ToArray()) + "\r\n";
+        }
+        public int row_count()
+        {
+            return this.rows.Count();
+        }
+        public int attribute_count()
+        {
+            return this.attributes.Count();
+        }
+
     }
    
  

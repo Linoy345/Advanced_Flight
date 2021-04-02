@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
+    /*
+     * Hold flight info of one plane part.
+     */
     class Attribute
     {
         public string name;
@@ -25,6 +28,10 @@ namespace Advanced_Flight_Simulator
         public string get_value(int index)
         {
             return this.value_list[index];
+        }
+        public List<string> get_values()
+        {
+            return this.value_list;
         }
         public void add_value(string new_value)
         {
