@@ -59,18 +59,20 @@
     <Compile Include="controls.xaml.cs">
       <DependentUpon>controls.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FlightViewModel.cs" />
     <Compile Include="Flight_Info.cs" />
+    <Compile Include="IClient.cs" />
+    <Compile Include="IFlightModel.cs" />
     <Compile Include="Indices.xaml.cs">
       <DependentUpon>Indices.xaml</DependentUpon>
     </Compile>
     <Compile Include="Joistic.xaml.cs">
       <DependentUpon>Joistic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ContinueWindow.xaml.cs">
-      <DependentUpon>ContinueWindow.xaml</DependentUpon>
+    <Compile Include="DisplayWindow.xaml.cs">
+      <DependentUpon>DisplayWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model_Flight_Client.cs" />
-    <Compile Include="Model_IClient.cs" />
     <Page Include="controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -95,12 +97,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ContinueWindow.xaml">
+    <Page Include="DisplayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MyFlightModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

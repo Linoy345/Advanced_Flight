@@ -26,7 +26,7 @@ namespace Advanced_Flight_Simulator
 
         private void back_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
         private void play_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -36,13 +36,13 @@ namespace Advanced_Flight_Simulator
 
         private void pause_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-
+            
         }
 
         private void stop_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            pause_MouseLeftButtonUp(sender, e);
-            slider.Value = 0;
+        //    pause_MouseLeftButtonUp(sender, e);
+          //  slider.Value = 20;
        //     continueWindow
        //     framId = 0;
             

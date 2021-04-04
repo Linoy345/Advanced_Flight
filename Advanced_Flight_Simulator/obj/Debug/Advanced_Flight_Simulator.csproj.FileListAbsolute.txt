@@ -59,14 +59,12 @@ C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\bin\Debug\
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.csprojAssemblyReference.cache
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Joistic.g.cs
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\MainWindow.g.cs
-C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\ContinueWindow.g.cs
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\App.g.cs
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator_MarkupCompile.cache
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator_MarkupCompile.lref
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Joistic.baml
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\MainWindow.baml
-C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\ContinueWindow.baml
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.g.resources
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.Properties.Resources.resources
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Advanced_Flight_Simulator.csproj.GenerateResource.cache
@@ -79,3 +77,5 @@ C:\Users\yairy\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\
 C:\Users\yairy\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\controls.baml
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Indices.g.cs
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Indices.baml
+C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\DisplayWindow.g.cs
+C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\DisplayWindow.baml

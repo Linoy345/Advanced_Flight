@@ -22,8 +22,10 @@
         <Image x:Name="play"  MouseLeftButtonUp="play_MouseLeftButtonUp" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="play.png" />
         <Image x:Name="pause" MouseLeftButtonUp="pause_MouseLeftButtonUp" Grid.Row="0" Grid.Column="2" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="pause.png" />
         <Image x:Name="stop"  MouseLeftButtonUp="stop_MouseLeftButtonUp" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="stop.png" />
-        <Image x:Name="next"  MouseLeftButtonUp="next_MouseLeftButtonUp" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="next.png" />
-        <Slider x:Name="slider" Minimum="0" Maximum="100" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Grid.ColumnSpan="5"/>
+        <Image x:Name="next" MouseLeftButtonUp="next_MouseLeftButtonUp" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="next.png" />
         
+        <Slider x:Name="slider" Minimum="0" Maximum= "{Binding VM_RowCount}" Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Grid.ColumnSpan="5" Value="{Binding VM_FrameId }"/>
+        
+
     </Grid>
 </UserControl>

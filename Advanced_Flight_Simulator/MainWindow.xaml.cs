@@ -37,8 +37,8 @@ namespace Advanced_Flight_Simulator
         {
 
          
-            ContinueWindow continueWindow = new ContinueWindow();
-            continueWindow.Show();
+            DisplayWindow displayWindow = new DisplayWindow();
+            displayWindow.Show();
 
 
 

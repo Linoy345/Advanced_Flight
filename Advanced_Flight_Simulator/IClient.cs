@@ -1,5 +1,12 @@
-﻿namespace Advanced_Flight_Simulator {
-    interface Model_IClient
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Advanced_Flight_Simulator
+{
+    interface IClient
     {
         void connect(string ip, int port);
         /*

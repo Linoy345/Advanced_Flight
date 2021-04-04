@@ -5,13 +5,19 @@ using System.IO;
 
 namespace Advanced_Flight_Simulator
 {
-    public class Model_Flight_Client : Model_IClient
+    public class Model_Flight_Client : IClient
     {
         protected TcpClient client;
         protected NetworkStream stream;
         public Model_Flight_Client()
         {
             client = new TcpClient();
+        }
+        public Model_Flight_Client(string ip, int port)
+        {
+            client = new TcpClient();
+            client.Connect(ip, port);
+            stream = client.GetStream();
         }
         private bool is_connected()
         {
