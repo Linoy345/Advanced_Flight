@@ -56,13 +56,25 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Attribute.cs" />
+    <Compile Include="controls.xaml.cs">
+      <DependentUpon>controls.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FlightViewModel.cs" />
     <Compile Include="Flight_Info.cs" />
+    <Compile Include="IFlightModel.cs" />
+    <Compile Include="ITelnetClient.cs" />
     <Compile Include="Joistic.xaml.cs">
       <DependentUpon>Joistic.xaml</DependentUpon>
     </Compile>
     <Compile Include="ContinueWindow.xaml.cs">
       <DependentUpon>ContinueWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="MyFlightModel.cs" />
+    <Compile Include="ViewModel.cs" />
+    <Page Include="controls.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Joistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -85,8 +97,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model_Flight_Client.cs" />
-    <Compile Include="Model_IClient.cs" />
+    <Compile Include="MyTelnetClient.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -111,6 +122,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="play.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pause.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="stop.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="next.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
