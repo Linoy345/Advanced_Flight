@@ -41,7 +41,11 @@ namespace Advanced_Flight_Simulator
 
         private void stop_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            slider.Value = 20;
+            pause_MouseLeftButtonUp(sender, e);
+            slider.Value = 0;
+            continueWindow
+            framId = 0;
+            
         }
 
         private void next_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
