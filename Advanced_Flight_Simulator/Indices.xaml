@@ -1,0 +1,38 @@
+﻿<UserControl x:Class="Advanced_Flight_Simulator.Indices"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Advanced_Flight_Simulator"
+        mc:Ignorable="d"
+        Height="450" Width="1000">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0" TextWrapping="Wrap" Text="Flight direction :" VerticalAlignment="Top"/>
+        <Ellipse Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Height="200"  VerticalAlignment="Center" Width="250" Stroke="Black" Grid.ColumnSpan="3"/>
+        <Image Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Grid.ColumnSpan="3" Source="airplane.png"/>
+        <Image HorizontalAlignment="Center" Height="100" Grid.Row="1" VerticalAlignment="Center" Width="100" Source="pitch.png"/>
+        <Image Grid.Column="1" HorizontalAlignment="Center" Height="100" Grid.Row="1" VerticalAlignment="Center" Width="100" Source="yaw.png"/>
+        <Image Grid.Column="2" HorizontalAlignment="Center" Height="100" Grid.Row="1" VerticalAlignment="Center" Width="100" Source="roll.png"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="pitch:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" Grid.Column="1" TextWrapping="Wrap" Text="yaw:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Center" Grid.Row="1" Grid.Column="2" TextWrapping="Wrap" Text="roll:" VerticalAlignment="Top"/>
+        <ScrollBar Grid.Column="4" HorizontalAlignment="Right" Grid.Row="1" VerticalAlignment="Center" Width="35" Height="190"/>
+        <TextBlock HorizontalAlignment="Left" Grid.Row="1" Grid.Column="4" TextWrapping="Wrap" Text="Flight altitude:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Right" Grid.Row="0" Grid.Column="3" TextWrapping="Wrap" Text="Flight speed:" VerticalAlignment="Top"/>
+        <Image Grid.ColumnSpan="3" Grid.Column="3" HorizontalAlignment="Center" Height="191" Grid.Row="0" VerticalAlignment="Center" Width="244" Source="speed.png"/>
+        <TextBlock Grid.Column="4" HorizontalAlignment="Center" Grid.Row="1" TextWrapping="Wrap" Text="altitude: 0" VerticalAlignment="Center"/>
+        <Image Grid.ColumnSpan="3" Grid.Column="3" Grid.Row="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Center" Width="100" Source="poi.png"/>
+    </Grid>
+</UserControl>
