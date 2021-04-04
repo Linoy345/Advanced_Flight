@@ -21,36 +21,41 @@ namespace Advanced_Flight_Simulator
     {
 
         //private ViewModelPlayBack viewModelPlayBack;
-        FlightViewModel vm;
+        //FlightViewModel vm;
         public ContinueWindow()
         {
             InitializeComponent(); //call it from mainWindow.
 
-            vm = new FlightViewModel(new MyFlightModel(new MyTelnetClient()));
-            DataContext = vm;
+            //vm = new FlightViewModel(new MyFlightModel(new MyTelnetClient()));
+            //DataContext = vm;
 
             int port = 5400;
             string ip = "127.0.0.1";
-            MyTelnetClient mfc = new MyTelnetClient();
+            //MyTelnetClient mfc = new MyTelnetClient();
             Flight_Info info = new Flight_Info();
             info.init_Flight_Info("reg_flight.csv", "playback_small.xml");
-            mfc.connect(ip, port);
+            //mfc.connect(ip, port);
 
 
-            ViewModelPlayBack vMlPlayBack = new ViewModelPlayBack();
-            while (true)
-            {
-                if (vMlPlayBack.IsRun)
-                {
-                    mfc.write(info.get_row_string(fram_id));
-                    Thread.Sleep(10);
-                    fram_id++;
-                }
-            }
-            this.viewModelPlayBack = viewModelPlayBack;
-            
+            ////ViewModelPlayBack vMlPlayBack = new ViewModelPlayBack();
+            //while (true)
+            //{
+            //    if (vMlPlayBack.IsRun)
+            //    {
+            //        mfc.write(info.get_row_string(fram_id));
+            //        Thread.Sleep(10);
+            //        fram_id++;
+            //    }
+            //}
+            //this.viewModelPlayBack = viewModelPlayBack;
+
         }
 
-        internal ViewModelPlayBack ViewModelPlayBack { get => viewModelPlayBack; set => viewModelPlayBack = value; }
+        private void Joistic_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        //internal ViewModelPlayBack ViewModelPlayBack { get => viewModelPlayBack; set => viewModelPlayBack = value; }
     }
 }

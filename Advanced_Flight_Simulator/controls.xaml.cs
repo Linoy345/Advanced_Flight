@@ -43,8 +43,8 @@ namespace Advanced_Flight_Simulator
         {
             pause_MouseLeftButtonUp(sender, e);
             slider.Value = 0;
-            continueWindow
-            framId = 0;
+       //     continueWindow
+       //     framId = 0;
             
         }
 
