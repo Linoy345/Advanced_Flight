@@ -60,6 +60,9 @@
       <DependentUpon>controls.xaml</DependentUpon>
     </Compile>
     <Compile Include="Flight_Info.cs" />
+    <Compile Include="Indices.xaml.cs">
+      <DependentUpon>Indices.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Joistic.xaml.cs">
       <DependentUpon>Joistic.xaml</DependentUpon>
     </Compile>
@@ -71,6 +74,10 @@
     <Page Include="controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Indices.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Joistic.xaml">
       <SubType>Designer</SubType>
@@ -133,6 +140,24 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="next.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="yaw.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="airplane.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="pitch.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="speed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="poi.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="roll.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

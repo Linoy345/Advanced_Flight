@@ -77,3 +77,5 @@ C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\controls.baml
 C:\Users\yairy\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\controls.g.cs
 C:\Users\yairy\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\controls.baml
+C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Indices.g.cs
+C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\Indices.baml
