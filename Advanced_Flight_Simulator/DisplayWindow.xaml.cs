@@ -56,6 +56,10 @@ namespace Advanced_Flight_Simulator
 
         }
 
+      
+
+
+
         //internal ViewModelPlayBack ViewModelPlayBack { get => viewModelPlayBack; set => viewModelPlayBack = value; }
     }
 }

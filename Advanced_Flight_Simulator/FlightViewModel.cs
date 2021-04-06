@@ -35,9 +35,47 @@ namespace Advanced_Flight_Simulator
             get { return model.FrameId; }
             set { model.FrameId = value; }
         }
+        public double VM_Rudder
+        {
+            get { return model.Rudder; }
+            set { model.Rudder = value; }
+        }
+        
+        public double VM_Throttle
+        {
+            get { return model.Throttle; }
+            set { model.Throttle = value; }
+            
+        }
+        public double VM_Aileron
+        {
+            get { return model.Aileron; }
+            set { model.Aileron = value; }
+
+        }
+
+        public double VM_Elevator
+        {
+            get { return model.Elevator; }
+            set { model.Elevator = value; }
+
+        }
+
+        public double VM_X
+        {
+            get { return model.X; }
+            set { model.X = value; }
+
+        }
+        public double VM_Y
+        {
+            get { return model.Y; }
+            set { model.Y = value; }
+
+        }
         public int VM_RowCount
         {
-            get { return model.RowCount; } 
+            get { return model.RowCount;} 
         }
 
         public bool VM_ShouldStop
@@ -49,6 +87,9 @@ namespace Advanced_Flight_Simulator
         {
             model.start();
         }
+
+
+        
 
     }
 }

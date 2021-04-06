@@ -19,6 +19,12 @@ namespace Advanced_Flight_Simulator
 
         bool ShouldStop { set; get; }
         int FrameId { set; get; }
+        double Rudder { set; get; }
+        double Throttle { set; get; }
+        double Aileron { set; get; }
+        double Elevator { set; get; }
+        double X { set; get; }
+        double Y { set; get; }
 
         int RowCount { get; }
 
