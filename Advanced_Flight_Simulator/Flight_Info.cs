@@ -34,10 +34,10 @@ namespace Advanced_Flight_Simulator
         {
             XElement Xelement = XElement.Load(xml_path);
             XDocument xDoc = XDocument.Load(xml_path);
-            IEnumerable<string> query = Xelement.Descendants("output").Descendants("name").Select(name => (string)name);
-            foreach (var name in query.ToList())
+            IEnumerable<string> query = Xelement.Descendants("output").Descendants("name").Select(name => (string) name);
+            foreach(var name in query.ToList())
             {
-                attributes.Add(new Attribute(name));
+                    attributes.Add(new Attribute(name));
             }
         }
         /*
@@ -58,10 +58,8 @@ namespace Advanced_Flight_Simulator
                 foreach (var attribute in attributes)
                 {
                     current_name = attribute.name;
-                    if (rows[row_index].ContainsKey(attribute.name))
-                    {
-                        current_name += "2";
-                    }; // Add 2 to name if two attributes have the same name
+                    if (rows[row_index].ContainsKey(attribute.name)) {
+                        current_name += "2"; }; // Add 2 to name if two attributes have the same name
                     current_value = current_line[coulumn_index].ToString();
                     attribute.add_value(current_value);
                     rows[row_index].Add(current_name, current_value);
@@ -95,19 +93,19 @@ namespace Advanced_Flight_Simulator
             }
             return names;
         }
-        public Dictionary<string, string> get_row(int row)
+        public Dictionary<string,string> get_row(int row)
         {
             return this.rows[row];
         }
 
         public string get_value(int row, string attribute_name)
         {
-            if (row < row_count() && rows[row].ContainsKey(attribute_name))
+            if(row < row_count() && rows[row].ContainsKey(attribute_name))
             {
                 return rows[row][attribute_name];
             }
             return string.Empty;
-
+               
         }
 
         /*
@@ -127,6 +125,6 @@ namespace Advanced_Flight_Simulator
         }
 
     }
-
-
+   
+ 
 }
