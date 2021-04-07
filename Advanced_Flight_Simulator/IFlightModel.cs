@@ -15,12 +15,30 @@ namespace Advanced_Flight_Simulator
         void start();
         // sensors properties
 
+        //Linoy
         bool ShouldStop { set; get; }
         int FrameId { set; get; }
+        double Rudder { set; get; }
+        double Throttle { set; get; }
+        double Aileron { set; get; }
+        double Elevator { set; get; }
+        double X { set; get; }
+        double Y { set; get; }
 
+        //Orad
+        double Direction { get; set; }
+        double Yaw { get; set; }
+        double Roll { get; set; }
+        double Pitch { get; set; }
+        double Altitude { get; set; }
+        double Speed { get; set; }
+
+        //Adam
         double Frequency { set; get; }
 
+        //Yair
         int RowCount { get; }
+
 
         // activate actuators
         void stopFrame();

@@ -30,6 +30,7 @@ namespace Advanced_Flight_Simulator
         public MainWindow()
         {
             InitializeComponent();
+
         }
 
         //int fram_id;
