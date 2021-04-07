@@ -16,9 +16,15 @@ namespace Advanced_Flight_Simulator
         volatile private bool shouldStop;
         volatile private int frameId;
         volatile private int rowCount;
+        private double yaw;
+        private double roll;
+        private double pitch;
+        private double direction;
+        private double altitude;
+        private double speed;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public MyFlightModel(IClient client)
         {
             FrameId = 0;
@@ -38,7 +44,72 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("ShouldStop");
             }
         }
+        public double Direction
+        {
+            get { return direction; }
+            set
+            {
+                direction = value;
+                NotifyPropertyChanged("Direction");
+            }
+        }
 
+        public double Yaw
+        {
+            get { return yaw; }
+            set
+            {
+                yaw = value;
+                NotifyPropertyChanged("Yaw");
+            }
+        }
+        public double Roll
+        {
+            get { return roll; }
+          
+            set 
+            {
+                roll = value;
+                NotifyPropertyChanged("Roll");
+            }
+
+        }
+        public double Pitch
+        {
+            get { return pitch; }
+            set
+            {
+                pitch = value;
+                NotifyPropertyChanged("Pitch");
+            }
+        }
+        public double Altitude
+        {
+            get { return altitude; }
+            set
+            {
+                altitude = value;
+                NotifyPropertyChanged("Altitude");
+            }
+        }
+        public double Speed
+        {
+            get { return speed; }
+            set
+            {
+                speed = value;
+                NotifyPropertyChanged("Speed");
+            }
+        }
+        public void RefreshIndices()
+        {
+            Speed = Convert.ToDouble(info.get_value(FrameId, "airspeed-kt"));
+            Altitude = Convert.ToDouble(info.get_value(FrameId, "altitude-ft"));
+            Pitch = Convert.ToDouble(info.get_value(FrameId, "pitch-deg"));
+            Roll = Convert.ToDouble(info.get_value(FrameId, "roll-deg"));
+            Yaw = Convert.ToDouble(info.get_value(FrameId, "side-slip-deg"));
+            Direction = Convert.ToDouble(info.get_value(FrameId, "heading-deg"));
+        }
         public int FrameId
         {
             get { return frameId; }
@@ -95,6 +166,7 @@ namespace Advanced_Flight_Simulator
             if (!ShouldStop)
             {
                 client.write(info.get_row_string(FrameId));
+                RefreshIndices();
                 FrameId++;
             }
         }

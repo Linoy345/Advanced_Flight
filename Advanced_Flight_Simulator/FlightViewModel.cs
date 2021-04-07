@@ -49,6 +49,45 @@ namespace Advanced_Flight_Simulator
         {
             model.start();
         }
+        public double VM_Direction
+        {
+            get { return model.Direction; }
 
+            set { model.Direction = value; }
+        }
+        public double VM_Yaw
+        {
+            get {
+                double r = model.Yaw;
+                return model.Yaw; }
+
+            set { model.Yaw = value; }
+        }
+        public double VM_Roll
+        {
+            get { return model.Roll; }
+
+            set { model.Roll = value; }
+        }
+        public double VM_Pitch
+        {
+            get { return model.Pitch; }
+
+            set { model.Pitch = value; }
+        }
+        public double VM_Altitude
+        {
+            get {
+                double d = model.Altitude;
+                return model.Altitude; }
+
+            set { model.Altitude = value; }
+        }
+        public double VM_Speed
+        {
+            get { return model.Speed; }
+
+            set { model.Speed = value; }
+        }
     }
 }
