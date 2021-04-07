@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="Advanced_Flight_Simulator.Joistic"
+ xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Advanced_Flight_Simulator"
+             mc:Ignorable="d" 
+             d:DesignHeight="250" d:DesignWidth="250">
+    <Viewbox>
+        <Grid>
+
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0*"/>
+                <ColumnDefinition Width="273*"/>
+                <ColumnDefinition Width="2*"/>
+            </Grid.ColumnDefinitions>
+            <Canvas  x:Name="Base" Margin="91,80,101.4,80" Grid.Column="1">
+                <Ellipse HorizontalAlignment="Left" Height="340" VerticalAlignment="Top" Width="340">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF2C2A2A" Offset="1" />
+                            <GradientStop Color="#FF3A3737" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Ellipse HorizontalAlignment="Left" Height="170" VerticalAlignment="Top" Width="170" Canvas.Left="84" Canvas.Top="84">
+                    <Ellipse.Fill>
+                        <RadialGradientBrush>
+                            <GradientStop Color="#FF0E0E0E" Offset="1" />
+                            <GradientStop Color="#FF1D1D1D" />
+                            <GradientStop Color="#FF323030" Offset="0.453" />
+                        </RadialGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" Canvas.Left="147.875" Canvas.Top="37.625" />
+                <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="147.875" Canvas.Top="284.125">
+                    <Path.RenderTransform>
+                        <ScaleTransform ScaleY="-1" />
+                    </Path.RenderTransform>
+                </Path>
+                <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z" Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="270.875" Canvas.Top="162.125">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <ScaleTransform ScaleY="-1" ScaleX="-1" />
+                            <RotateTransform Angle="-90" />
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+                <Path Data="M205.75,65.625 L226.875,47.25 L248.5,65.625 z"  Fill="#FF575757" HorizontalAlignment="Left" Height="18.375" Stretch="Fill" UseLayoutRounding="False" VerticalAlignment="Top" Width="42.75" RenderTransformOrigin="0.5,0.5" Canvas.Left="24.375" Canvas.Top="163.625">
+                    <Path.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform Angle="90" />
+                            <ScaleTransform ScaleX="-1" />
+                        </TransformGroup>
+                    </Path.RenderTransform>
+                </Path>
+
+                <Canvas  x:Name="Knob" VerticalAlignment="Top" HorizontalAlignment="Left" Width="0" Height="0" RenderTransformOrigin="0.5,0.5" Canvas.Left="125" Canvas.Top="125">
+                    <!--<Ellipse x:Name="Shadow" HorizontalAlignment="Left" Height="88" VerticalAlignment="Top" Width="86" Fill="#52131212" Canvas.Left="22" Canvas.Top="18" />-->
+                    <Ellipse x:Name="KnobBase" HorizontalAlignment="Left" Height="90" VerticalAlignment="Top" Width="90" RenderTransformOrigin="0.5,0.5" Canvas.Top="{Binding VM_Y}" Canvas.Left="{Binding VM_X}">
+                        <Ellipse.Fill>
+                            <RadialGradientBrush>
+                                <GradientStop Color="#FF8A8A8A" />
+                                <GradientStop Color="#FF979797" Offset="1" />
+                            </RadialGradientBrush>
+                        </Ellipse.Fill>
+                    </Ellipse>
+
+                    <Canvas.RenderTransform>
+                        <TranslateTransform x:Name="knobPosition" />
+                    </Canvas.RenderTransform>
+                    <Canvas.Resources>
+
+                        <Storyboard x:Key="CenterKnob" Name="centerKnob">
+
+                            <DoubleAnimation Storyboard.TargetName="knobPosition"
+                             Storyboard.TargetProperty="X" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <BackEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                            <DoubleAnimation Storyboard.TargetName="knobPosition" Storyboard.TargetProperty="Y" To="0" Duration="0:0:0.2">
+                                <DoubleAnimation.EasingFunction>
+                                    <BackEase EasingMode="EaseInOut" />
+                                </DoubleAnimation.EasingFunction>
+                            </DoubleAnimation>
+                        </Storyboard>
+                    </Canvas.Resources>
+                </Canvas>
+            </Canvas>
+
+            <Slider x:Name="throttleSlider" Minimum="-1" Maximum="1" HorizontalAlignment="Left" Height="37" Margin="-81,235,0,0" VerticalAlignment="Top" Width="301" RenderTransformOrigin="0.5,0.5" Value="{Binding VM_Throttle }" Grid.ColumnSpan="2">
+                <Slider.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-90.437"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Slider.RenderTransform>
+            </Slider>
+            <Slider x:Name="rudderSlider" Minimum="-1" Maximum="1" HorizontalAlignment="Left" Margin="115,430,0,22" Width="302" RenderTransformOrigin="0.5,0.5" Value="{Binding VM_Rudder }" Grid.Column="1" Foreground="{x:Null}"/>
+            <TextBlock x:Name="alieron" HorizontalAlignment="Center" Margin="203,32,186.2,408" TextWrapping="Wrap" Text="alieron" VerticalAlignment="Center" Height="40" Width="106" TextAlignment="Center" FontWeight="Bold" FontSize="22" RenderTransformOrigin="-0.113,0.457" Grid.Column="1"/>
+            <TextBlock x:Name="rudder" HorizontalAlignment="Center" Margin="201,450,174.2,-20" TextWrapping="Wrap" Text="rudder" VerticalAlignment="Center" Height="50" Width="120" TextAlignment="Center" FontWeight="Bold" FontSize="22" Grid.Column="1"/>
+            <TextBlock x:Name="throttle" HorizontalAlignment="Center" Margin="-27,215,409.2,225" TextWrapping="Wrap" Text="throttle" VerticalAlignment="Center" Height="40" Width="113" TextAlignment="Center" FontWeight="Bold" FontSize="22" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="89.569"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+            <TextBlock x:Name="elevator" HorizontalAlignment="Center" Margin="402,223,-7.8,0" TextWrapping="Wrap" Text="elevator" VerticalAlignment="Top" Height="45" Width="105" TextAlignment="Center" FontWeight="Bold" FontSize="22" RenderTransformOrigin="0.294,-1.357" Grid.ColumnSpan="2" Grid.Column="1">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform Angle="-269.715"/>
+                        <TranslateTransform X="105.301" Y="62.354"/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
+            </TextBlock>
+         </Grid>
+    </Viewbox>
+    
+    
+
+</UserControl>
