@@ -22,6 +22,7 @@ namespace Advanced_Flight_Simulator
         public Controls()
         {
             InitializeComponent();
+            
         }
 
         private void back_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)

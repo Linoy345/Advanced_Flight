@@ -86,28 +86,19 @@ namespace Advanced_Flight_Simulator
             }
             return new List<string>();
         }
-        public List<string> get_attribute_names()
-        {
-            List<string> names = new List<string>();
-            foreach (KeyValuePair<string, string> entry in rows[0])
-            {
-                names.Add(entry.Key);
-            }
-            return names;
-        }
-        public Dictionary<string, string> get_row(int row)
+        public Dictionary<string,string> get_row(int row)
         {
             return this.rows[row];
         }
 
         public string get_value(int row, string attribute_name)
         {
-            if (row < row_count() && rows[row].ContainsKey(attribute_name))
+            if(row < row_count() && rows[row].ContainsKey(attribute_name))
             {
                 return rows[row][attribute_name];
             }
             return string.Empty;
-
+               
         }
 
         /*

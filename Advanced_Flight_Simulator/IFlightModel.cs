@@ -19,13 +19,14 @@ namespace Advanced_Flight_Simulator
 
         bool ShouldStop { set; get; }
         int FrameId { set; get; }
-        double Direction { get; set; }
-        double Yaw { get; set; }
-        double Roll { get; set; }
-        double Pitch { get; set; }
-        double Altitude { get; set; }
-        double Speed { get; set;}
-        int RowCount { get; set;}
+        double Rudder { set; get; }
+        double Throttle { set; get; }
+        double Aileron { set; get; }
+        double Elevator { set; get; }
+        double X { set; get; }
+        double Y { set; get; }
+
+        int RowCount { get; }
 
         // activate actuators
         void stopFrame();

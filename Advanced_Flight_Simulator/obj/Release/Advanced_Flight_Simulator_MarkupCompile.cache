@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Release\
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Release\
 Advanced_Flight_Simulator
 none
 false
 TRACE
-C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\App.xaml
-41618307552
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\App.xaml
+5735872864
 
-12-222578963
+1658090280
 13-1505183044
-controls.xaml;Joistic.xaml;MainWindow.xaml;ContinueWindow.xaml;
+controls.xaml;Indices.xaml;Joistic.xaml;MainWindow.xaml;DisplayWindow.xaml;
 
 True
 
