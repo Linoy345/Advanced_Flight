@@ -15,10 +15,10 @@ namespace Advanced_Flight_Simulator
         void start();
         // sensors properties
 
-        //int FrameNum { set; get; }
-
         bool ShouldStop { set; get; }
         int FrameId { set; get; }
+
+        double Frequency { set; get; }
 
         int RowCount { get; }
 

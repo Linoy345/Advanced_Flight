@@ -16,10 +16,11 @@ namespace Advanced_Flight_Simulator
         {
             this.model = model;
             model.PropertyChanged +=
-            delegate (Object sender, PropertyChangedEventArgs e) {
+            delegate (Object sender, PropertyChangedEventArgs e)
+            {
                 NotifyPropertyChanged("VM_" + e.PropertyName);
             };
-       
+
         }
 
 
@@ -35,9 +36,16 @@ namespace Advanced_Flight_Simulator
             get { return model.FrameId; }
             set { model.FrameId = value; }
         }
+
+        public double VM_Frequency
+        {
+            get { return model.Frequency; }
+            set { model.Frequency = value; }
+        }
+
         public int VM_RowCount
         {
-            get { return model.RowCount; } 
+            get { return model.RowCount; }
         }
 
         public bool VM_ShouldStop
@@ -45,10 +53,20 @@ namespace Advanced_Flight_Simulator
             get { return model.ShouldStop; }
             set { model.ShouldStop = value; }
         }
+
         public void VM_Start()
         {
             model.start();
         }
 
+        public void VM_Disconnect()
+        {
+            model.disconnect();
+        }
+
+        public static explicit operator FlightViewModel(string v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

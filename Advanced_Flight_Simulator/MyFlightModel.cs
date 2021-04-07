@@ -15,13 +15,15 @@ namespace Advanced_Flight_Simulator
 
         volatile private bool shouldStop;
         volatile private int frameId;
+        private double frequency;
         volatile private int rowCount;
 
         public event PropertyChangedEventHandler PropertyChanged;
-        
+
         public MyFlightModel(IClient client)
         {
             FrameId = 0;
+            Frequency = 1;
             info = new Flight_Info();
             info.init_Flight_Info("reg_flight.csv", "playback_small.xml"); // TODO: INIT in open method
             this.client = client;
@@ -46,6 +48,16 @@ namespace Advanced_Flight_Simulator
             {
                 frameId = value;
                 NotifyPropertyChanged("FrameId");
+            }
+        }
+
+        public double Frequency
+        {
+            get { return frequency; }
+            set
+            {
+                frequency = 100 / value;
+                NotifyPropertyChanged("Frequency");
             }
         }
 
@@ -106,12 +118,13 @@ namespace Advanced_Flight_Simulator
 
         public void start()
         {
-            new Thread(delegate () {
+            new Thread(delegate ()
+            {
                 while (frameId < info.row_count())
                 {
                     sendFrame();
                     // the same for the other sensors properties
-                    Thread.Sleep(60);// read the data in 4Hz
+                    Thread.Sleep((int)Frequency);// read the data in 4Hz
                 }
             }).Start();
         }

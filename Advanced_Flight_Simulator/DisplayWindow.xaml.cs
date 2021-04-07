@@ -26,27 +26,25 @@ namespace Advanced_Flight_Simulator
             int port = 5400;
             string ip = "127.0.0.1";
             vm = new FlightViewModel(new MyFlightModel(new Model_Flight_Client(ip, port)));
+
             DataContext = vm;
         }
 
-       
+
 
         private void Joistic_Loaded(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Button_Click_Pause(object sender, RoutedEventArgs e)
+        private void Button_Click_Disconnect(object sender, RoutedEventArgs e)
         {
-            vm.VM_ShouldStop = true;
+            vm.VM_Disconnect();
         }
 
-        private void Button_Click_Play(object sender, RoutedEventArgs e)
-        {
-            vm.VM_ShouldStop = false;
-        }
 
-        private void Button_Click_Start(object sender, RoutedEventArgs e)
+
+        private void Button_Click_Connect(object sender, RoutedEventArgs e)
         {
             vm.VM_Start();
         }
@@ -56,6 +54,5 @@ namespace Advanced_Flight_Simulator
 
         }
 
-        //internal ViewModelPlayBack ViewModelPlayBack { get => viewModelPlayBack; set => viewModelPlayBack = value; }
     }
 }

@@ -19,38 +19,32 @@ namespace Advanced_Flight_Simulator
     /// </summary>
     public partial class Controls : UserControl
     {
+        //FlightViewModel vmm;
         public Controls()
         {
             InitializeComponent();
+            //vm = new FlightBoardViewModel();
+            //DataContext = vm;
         }
+
 
         private void back_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            
-        }
-
-        private void play_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-
-        }
-
-        private void pause_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            
-        }
-
-        private void stop_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-        //    pause_MouseLeftButtonUp(sender, e);
-          //  slider.Value = 20;
-       //     continueWindow
-       //     framId = 0;
-            
+            slider.Value -= 10;
         }
 
         private void next_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
+            slider.Value += 10;
+        }
+
+        private void stop_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            slider.Value = 0;
+            pauseRadioButton.IsChecked = true;
 
         }
+
+        
     }
 }
