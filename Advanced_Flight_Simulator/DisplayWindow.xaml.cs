@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Win32;
+
 
 namespace Advanced_Flight_Simulator
 {
@@ -61,6 +63,7 @@ namespace Advanced_Flight_Simulator
                 System.IO.StreamReader sr = new System.IO.StreamReader(openFileDialog.FileName);
                 //vm.VM_init("reg_flight.csv", "playback_small.xml");
             }
+        }
 
 
     }
