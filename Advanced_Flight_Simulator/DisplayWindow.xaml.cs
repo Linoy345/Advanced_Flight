@@ -53,6 +53,15 @@ namespace Advanced_Flight_Simulator
         {
 
         }
+        private void Button_Click_OpenFile(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {   //(csv_path, xml_path);
+                System.IO.StreamReader sr = new System.IO.StreamReader(openFileDialog.FileName);
+                //vm.VM_init("reg_flight.csv", "playback_small.xml");
+            }
+
 
     }
 }
