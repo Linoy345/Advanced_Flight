@@ -40,6 +40,7 @@ namespace Advanced_Flight_Simulator
          
             DisplayWindow displayWindow = new DisplayWindow();
             displayWindow.Show();
+            Close();
 
 
 

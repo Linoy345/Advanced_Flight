@@ -55,33 +55,33 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Attribute.cs" />
-    <Compile Include="controls.xaml.cs">
+    <Compile Include="Model\Attribute.cs" />
+    <Compile Include="View\controls.xaml.cs">
       <DependentUpon>controls.xaml</DependentUpon>
     </Compile>
-    <Compile Include="FlightViewModel.cs" />
-    <Compile Include="Flight_Info.cs" />
-    <Compile Include="IClient.cs" />
-    <Compile Include="IFlightModel.cs" />
-    <Compile Include="Indices.xaml.cs">
+    <Compile Include="ViewModel\FlightViewModel.cs" />
+    <Compile Include="Model\Flight_Info.cs" />
+    <Compile Include="Model\IClient.cs" />
+    <Compile Include="Model\IFlightModel.cs" />
+    <Compile Include="View\Indices.xaml.cs">
       <DependentUpon>Indices.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Joistic.xaml.cs">
+    <Compile Include="View\Joistic.xaml.cs">
       <DependentUpon>Joistic.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DisplayWindow.xaml.cs">
+    <Compile Include="View\DisplayWindow.xaml.cs">
       <DependentUpon>DisplayWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Model_Flight_Client.cs" />
-    <Page Include="controls.xaml">
+    <Compile Include="Model\Model_Flight_Client.cs" />
+    <Page Include="View\controls.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Indices.xaml">
+    <Page Include="View\Indices.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Joistic.xaml">
+    <Page Include="View\Joistic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -97,13 +97,13 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="DisplayWindow.xaml">
+    <Page Include="View\DisplayWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="MyFlightModel.cs" />
+    <Compile Include="Model\MyFlightModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -130,40 +130,40 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="back.png" />
+    <Resource Include="View\images\back.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="play.png" />
+    <Resource Include="View\images\play.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pause.png" />
+    <Resource Include="View\images\pause.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="stop.png" />
+    <Resource Include="View\images\stop.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="next.png" />
+    <Resource Include="View\images\next.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="yaw.png" />
+    <Resource Include="View\images\yaw.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="airplane.png" />
+    <Resource Include="View\images\airplane.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="pitch.png" />
+    <Resource Include="View\images\pitch.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="speed.png" />
+    <Resource Include="View\images\speed.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="poi.png" />
+    <Resource Include="View\images\poi.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="roll.png" />
+    <Resource Include="View\images\roll.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\" />
+    <Resource Include="View\images\sky2.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

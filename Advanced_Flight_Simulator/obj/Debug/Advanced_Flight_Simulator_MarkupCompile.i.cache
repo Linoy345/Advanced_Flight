@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\אורעד\Source\Repos\yair2121\Advanced_Flight6\Advanced_Flight_Simulator\obj\Debug\
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\
 Advanced_Flight_Simulator
 none
 false
 DEBUG;TRACE
-C:\Users\אורעד\Source\Repos\yair2121\Advanced_Flight6\Advanced_Flight_Simulator\App.xaml
-5735872864
+C:\Users\יונתן\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\App.xaml
+5-731415318
 
-17-1247238429
+17897334257
 13-1505183044
-controls.xaml;Indices.xaml;Joistic.xaml;MainWindow.xaml;DisplayWindow.xaml;
+View\controls.xaml;View\Indices.xaml;View\Joistic.xaml;MainWindow.xaml;View\DisplayWindow.xaml;
 
 True
 
