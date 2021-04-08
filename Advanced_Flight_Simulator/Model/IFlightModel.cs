@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OxyPlot;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,12 +8,14 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
-    interface IFlightModel : INotifyPropertyChanged
+    public interface IFlightModel : INotifyPropertyChanged
     {
-        // connection to the robot
+        // connection to the flight
         void connect(string ip, int port);
         void disconnect();
         void start();
+
+        string openFile();
         // sensors properties
 
         //Linoy
@@ -39,8 +42,11 @@ namespace Advanced_Flight_Simulator
         double Frequency { set; get; }
 
         //Yair
+        string getValue(int frame, string attributeName);
         int RowCount { get; }
-
+        List<string> AttributesNames { get; }
+        string GraphAttribute { set; get; }
+        List<DataPoint> GraphPoints { get; }
 
         // activate actuators
         void stopFrame();

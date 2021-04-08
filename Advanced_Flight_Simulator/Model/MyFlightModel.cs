@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using OxyPlot;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -8,13 +10,18 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
-    class MyFlightModel : IFlightModel
+    public class MyFlightModel : IFlightModel
     {
         private Flight_Info info;
         private IClient client;
 
         volatile private bool shouldStop;
         volatile private int frameId;
+
+
+        //volatile private List<string> attributesNames;
+        volatile private List<DataPoint> graphPoints;
+        volatile private string graphAttribute;
 
         private double throttle;
         private double rudder;
@@ -24,7 +31,6 @@ namespace Advanced_Flight_Simulator
         private double y;
 
         private double frequency;
-        volatile private int rowCount;
         private double yaw;
         private double roll;
         private double pitch;
@@ -40,6 +46,7 @@ namespace Advanced_Flight_Simulator
             Frequency = 1;
             info = new Flight_Info();
             this.client = client;
+            graphPoints = new List<DataPoint>();
             ShouldStop = false;
             x = 0;
             y = 0;
@@ -180,7 +187,6 @@ namespace Advanced_Flight_Simulator
             }
         }
         
-
         public double Rudder
         {
             get
@@ -235,11 +241,6 @@ namespace Advanced_Flight_Simulator
         public int RowCount
         {
             get { return info.row_count(); }
-            set
-            {
-                rowCount = value;
-                NotifyPropertyChanged("RowCount");
-            }
         }
 
 
@@ -294,6 +295,8 @@ namespace Advanced_Flight_Simulator
         public void init(string path)
         {
             info.init_Flight_Info(path);
+            NotifyPropertyChanged("AttributesNames");
+            NotifyPropertyChanged("RowCount");
         }
 
         public void start()
@@ -302,11 +305,69 @@ namespace Advanced_Flight_Simulator
             {
                 while (frameId < info.row_count())
                 {
+                    GraphPoints = UpdateGraphPoint();
                     sendFrame();
                     // the same for the other sensors properties
                     Thread.Sleep((int)Frequency);// read the data in 4Hz
                 }
             }).Start();
         }
+
+        //Yair addition:
+        private List<DataPoint> UpdateGraphPoint()
+        {
+            List<DataPoint> currentList = new List<DataPoint>();
+            for (int frame = 0; frame < frameId; frame++)
+            {
+                currentList.Add(new DataPoint(frame, Double.Parse(info.get_value(frame, graphAttribute))));
+            }
+            return currentList;
+        }
+        public List<DataPoint> GraphPoints
+        {
+            get
+            {
+                return graphPoints;
+            }
+            set
+            {
+                graphPoints = value;
+                NotifyPropertyChanged("GraphPoints");
+            }
+        }
+        public List<string> AttributesNames
+        {
+            get
+            {
+                return info.get_attribute_names();
+            }
+        }
+        public string GraphAttribute
+        {
+            get
+            {
+                return graphAttribute;
+            }
+            set
+            {
+                graphAttribute = value;
+                NotifyPropertyChanged("GraphAttribute");
+            }
+        }
+
+        public string getValue(int row, string attribueName)
+        {
+            return info.get_value(row, attribueName);
+        }
+        public string openFile()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {   //(csv_path, xml_path);
+                return openFileDialog.FileName;
+            }
+            return String.Empty;
+        }
+
     }
 }

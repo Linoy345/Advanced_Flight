@@ -1,22 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-
-using System.Net;
+using System.Data;
 using System.Net.Sockets;
-using System.IO;
-using System.Threading;
 
 namespace Advanced_Flight_Simulator
 {
@@ -25,26 +10,49 @@ namespace Advanced_Flight_Simulator
     /// </summary>
     public partial class MainWindow : Window
     {
-      
-
         public MainWindow()
         {
             InitializeComponent();
-
         }
 
-        //int fram_id;
-        private void Button_Click(object sender1, RoutedEventArgs e)
+        private void Connect_botton(object sender1, RoutedEventArgs e)
         {
+            try
+            {
+                if (!String.IsNullOrEmpty(Ip.Text) && !String.IsNullOrEmpty(Port.Text))
+                {
+                    DisplayWindow displayWindow = new DisplayWindow(Ip.Text, Port.Text);
+                    displayWindow.Show();
+                }
+            }
+            catch (FormatException)
+            {
+                errorMessage("Invalid IP or PORT");
+            }
+            catch (InvalidOperationException)
+            {
+                errorMessage("Invalid IP or PORT");
+            }
+            catch (ArgumentOutOfRangeException)
+            {
+                errorMessage("Invalid IP or PORT");
+            }
+            catch (SocketException)
+            {
+                errorMessage("Connection Error");
+            }
 
-         
+        }
+        private void errorMessage(string message)
+        {
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show(message, "Remainder - FlightGear", MessageBoxButton.OK, icon);
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
             DisplayWindow displayWindow = new DisplayWindow();
             displayWindow.Show();
-            Close();
-
-
-
         }
-
     }
 }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
-    interface IClient
+    public interface IClient
     {
         void connect(string ip, int port);
         /*

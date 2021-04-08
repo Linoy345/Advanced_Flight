@@ -9,7 +9,7 @@ namespace Advanced_Flight_Simulator
     /*
      * Hold flight info of one plane part.
      */
-    class Attribute
+    public class Attribute
     {
         public string name;
         private List<string> value_list;

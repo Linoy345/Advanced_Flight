@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
-    class FlightViewModel : INotifyPropertyChanged
+    public class FlightViewModel : INotifyPropertyChanged
     {
-        private IFlightModel model;
+        protected IFlightModel model;
 
         public event PropertyChangedEventHandler PropertyChanged;
         public FlightViewModel(IFlightModel model)
@@ -22,7 +22,6 @@ namespace Advanced_Flight_Simulator
             };
 
         }
-
 
         public void NotifyPropertyChanged(string propName)
         {
@@ -144,6 +143,10 @@ namespace Advanced_Flight_Simulator
         public void VM_init(string csv_path)
         {
             model.init(csv_path);
+        }
+        public string VM_openFile()
+        {
+            return model.openFile();
         }
     }
 }

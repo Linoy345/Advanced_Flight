@@ -10,7 +10,7 @@ namespace Advanced_Flight_Simulator
      * Handle Flight information- support different queries to extract data from specific attribute or specifiec row.
      * Require csv(for data) and xml(for headers) paths.
      */
-    class Flight_Info
+    public class Flight_Info
     {
         private List<Attribute> attributes;
         private List<Dictionary<string, string>> rows; // Keep rows in list- each row is a dictionary- key is attribute name.
@@ -45,31 +45,35 @@ namespace Advanced_Flight_Simulator
          */
         private void extract_values(string csv_path)
         {
-            string[] lines = File.ReadAllLines(csv_path);
-            int coulumn_index = 0;
-            int row_index = 0;
-            string current_value;
-            string current_name;
-
-            foreach (var line in lines)
+            try
             {
-                rows.Add(new Dictionary<string, string>());
-                string[] current_line = line.Split(',');
-                foreach (var attribute in attributes)
+                string[] lines = File.ReadAllLines(csv_path);
+                int coulumn_index = 0;
+                int row_index = 0;
+                string current_value;
+                string current_name;
+
+                foreach (var line in lines)
                 {
-                    current_name = attribute.name;
-                    if (rows[row_index].ContainsKey(attribute.name))
+                    rows.Add(new Dictionary<string, string>());
+                    string[] current_line = line.Split(',');
+                    foreach (var attribute in attributes)
                     {
-                        current_name += "2";
-                    }; // Add 2 to name if two attributes have the same name
-                    current_value = current_line[coulumn_index].ToString();
-                    attribute.add_value(current_value);
-                    rows[row_index].Add(current_name, current_value);
-                    coulumn_index++;
+                        current_name = attribute.name;
+                        if (rows[row_index].ContainsKey(attribute.name))
+                        {
+                            current_name += "2";
+                        }; // Add 2 to name if two attributes have the same name
+                        current_value = current_line[coulumn_index].ToString();
+                        attribute.add_value(current_value);
+                        rows[row_index].Add(current_name, current_value);
+                        coulumn_index++;
+                    }
+                    coulumn_index = 0;
+                    row_index++;
                 }
-                coulumn_index = 0;
-                row_index++;
             }
+            catch (ArgumentException) { }
         }
 
         /*
@@ -93,9 +97,12 @@ namespace Advanced_Flight_Simulator
 
         public string get_value(int row, string attribute_name)
         {
-            if(row < row_count() && rows[row].ContainsKey(attribute_name))
+            if (attribute_name != null)
             {
-                return rows[row][attribute_name];
+                if (row < row_count() && rows[row].ContainsKey(attribute_name))
+                {
+                    return rows[row][attribute_name];
+                }
             }
             return string.Empty;
                
@@ -117,7 +124,14 @@ namespace Advanced_Flight_Simulator
             return this.attributes.Count();
         }
 
+        public List<string> get_attribute_names()
+        {
+            List<string> names = new List<string>();
+            foreach(Attribute attribue in attributes)
+            {
+                names.Add(attribue.name);
+            }
+            return names;
+        }
     }
-
-
 }

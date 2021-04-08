@@ -28,14 +28,8 @@ namespace Advanced_Flight_Simulator
         {
             if (!is_connected())
             {
-                try
-                {
                     client.Connect(ip, port);
                     stream = client.GetStream();
-                } catch(System.Net.Sockets.SocketException e)
-                {
-                    Console.WriteLine(e.ToString());
-                }
             }
         }
         public void write(string line)
