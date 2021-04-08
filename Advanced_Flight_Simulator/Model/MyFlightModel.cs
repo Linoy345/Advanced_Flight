@@ -39,11 +39,8 @@ namespace Advanced_Flight_Simulator
             FrameId = 0;
             Frequency = 1;
             info = new Flight_Info();
-            //info.init_Flight_Info("reg_flight.csv"); // TODO: INIT in open method
             this.client = client;
             ShouldStop = false;
-
-
             x = 0;
             y = 0;
         }
@@ -207,7 +204,7 @@ namespace Advanced_Flight_Simulator
             }
             set
             {
-                if(value >= -1 && value <= 1)
+                if(value >= 0 && value <= 1)
                 {
                     throttle = value;
                     NotifyPropertyChanged("Throttle");
@@ -216,7 +213,15 @@ namespace Advanced_Flight_Simulator
             }
         }
 
-
+        public void updateJoistick()
+        {
+            Rudder = Convert.ToDouble(info.get_value(FrameId, "rudder"));
+            Throttle = Convert.ToDouble(info.get_value(FrameId, "throttle"));
+            Aileron = Convert.ToDouble(info.get_value(FrameId, "aileron"));
+            Elevator = Convert.ToDouble(info.get_value(FrameId, "elevator"));
+            X = (Aileron * 90);
+            Y = (Elevator * 90);
+        }
         public double Frequency
         {
             get { return frequency; }
@@ -270,15 +275,7 @@ namespace Advanced_Flight_Simulator
             stopFrame();
             FrameId = 0;
         }
-        public void updateJoistick() {
-            Rudder = Convert.ToDouble(info.get_value(FrameId, "rudder"));
-            Throttle = Convert.ToDouble(info.get_value(FrameId, "throttle"));
-            Aileron = Convert.ToDouble(info.get_value(FrameId, "aileron"));
-            Elevator = Convert.ToDouble(info.get_value(FrameId, "elevator"));
-
-            X = Aileron * 90;
-            Y = Elevator * 90;
-        }
+        
         public void sendFrame()
         {
             if (!ShouldStop)

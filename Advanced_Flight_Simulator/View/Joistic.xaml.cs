@@ -25,10 +25,5 @@ namespace Advanced_Flight_Simulator
             InitializeComponent();
         }
 
-       /* double calculateRadius()
-        {
-
-        }*/
-
-    }
+     }
 }

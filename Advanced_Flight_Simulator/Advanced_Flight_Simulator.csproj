@@ -121,6 +121,8 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="bin\Debug\Advanced_Flight_Simulator.exe.config" />
+    <None Include="bin\Debug\reg_flight.csv" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -164,6 +166,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="View\images\sky2.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\Advanced_Flight_Simulator.exe" />
+    <Content Include="bin\Debug\Advanced_Flight_Simulator.pdb" />
+    <Resource Include="bin\Debug\playback_small.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin\Release\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
