@@ -43,7 +43,7 @@ namespace Advanced_Flight_Simulator
             }
 
         }
-        private void errorMessage(string message)
+        public void errorMessage(string message)
         {
             MessageBoxImage icon = MessageBoxImage.Warning;
             MessageBox.Show(message, "Remainder - FlightGear", MessageBoxButton.OK, icon);

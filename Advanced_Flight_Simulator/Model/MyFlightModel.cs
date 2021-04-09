@@ -17,9 +17,9 @@ namespace Advanced_Flight_Simulator
 
         volatile private bool shouldStop;
         volatile private int frameId;
+        volatile private bool finishedStart; // Prevent from oppening multiple thread in start.
+        volatile private string filePath;
 
-
-        //volatile private List<string> attributesNames;
         volatile private List<DataPoint> graphPoints;
         volatile private string graphAttribute;
 
@@ -47,6 +47,7 @@ namespace Advanced_Flight_Simulator
             info = new Flight_Info();
             this.client = client;
             graphPoints = new List<DataPoint>();
+            FinishedStart = true;
             ShouldStop = false;
             x = 0;
             y = 0;
@@ -59,6 +60,15 @@ namespace Advanced_Flight_Simulator
             {
                 shouldStop = value;
                 NotifyPropertyChanged("ShouldStop");
+            }
+        }
+        public bool FinishedStart
+        {
+            get { return finishedStart; }
+            set
+            {
+                finishedStart = value;
+                NotifyPropertyChanged("FinishedStart");
             }
         }
         public double Direction
@@ -292,25 +302,35 @@ namespace Advanced_Flight_Simulator
         {
             return info.attribute_count();
         }
-        public void init(string path)
+        public void init()
         {
-            info.init_Flight_Info(path);
-            NotifyPropertyChanged("AttributesNames");
-            NotifyPropertyChanged("RowCount");
+            if (FilePath != string.Empty)
+            {
+                info.init_Flight_Info(FilePath);
+                NotifyPropertyChanged(string.Empty);
+                NotifyPropertyChanged("AttributesNames");
+                NotifyPropertyChanged("RowCount");
+            }
+
         }
 
         public void start()
         {
-            new Thread(delegate ()
+            if (FinishedStart)
             {
-                while (frameId < info.row_count())
+                new Thread(delegate ()
                 {
-                    GraphPoints = UpdateGraphPoint();
-                    sendFrame();
-                    // the same for the other sensors properties
-                    Thread.Sleep((int)Frequency);// read the data in 4Hz
-                }
-            }).Start();
+                    FinishedStart = false;
+                    while (frameId < info.row_count())
+                    { 
+                        GraphPoints = UpdateGraphPoint();
+                        sendFrame();
+                        // the same for the other sensors properties
+                        Thread.Sleep((int)Frequency);// read the data in 4Hz
+                    }
+                    FinishedStart = true;
+                }).Start();
+            }
         }
 
         //Yair addition:
@@ -364,9 +384,24 @@ namespace Advanced_Flight_Simulator
             OpenFileDialog openFileDialog = new OpenFileDialog();
             if (openFileDialog.ShowDialog() == true)
             {   //(csv_path, xml_path);
-                return openFileDialog.FileName;
+                FilePath = openFileDialog.FileName;
+            } else
+            {
+                FilePath = String.Empty;
             }
-            return String.Empty;
+            return FilePath;
+        }
+        public string FilePath
+        {
+            get
+            {
+                return filePath;
+            }
+            set
+            {
+                this.filePath = value;
+                NotifyPropertyChanged("FilePath");
+            }
         }
 
     }

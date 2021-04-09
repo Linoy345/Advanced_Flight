@@ -140,9 +140,9 @@ namespace Advanced_Flight_Simulator
             get { return model.Frequency; }
             set { model.Frequency = value; }
         }
-        public void VM_init(string csv_path)
+        public void VM_init()
         {
-            model.init(csv_path);
+            model.init();
         }
         public string VM_openFile()
         {
