@@ -14,12 +14,13 @@ namespace Advanced_Flight_Simulator
         void connect(string ip, int port);
         void disconnect();
         void start();
-
+        
         string openFile();
         // sensors properties
 
         //Linoy
         bool ShouldStop { set; get; }
+        bool FinishedStart {set; get;}
         int FrameId { set; get; }
         double Rudder { set; get; }
         double Throttle { set; get; }
@@ -28,7 +29,7 @@ namespace Advanced_Flight_Simulator
         double X { set; get; }
         double Y { set; get; }
 
-        void init(string path);
+        void init();
 
         //Orad
         double Direction { get; set; }
@@ -47,6 +48,7 @@ namespace Advanced_Flight_Simulator
         List<string> AttributesNames { get; }
         string GraphAttribute { set; get; }
         List<DataPoint> GraphPoints { get; }
+        string FilePath { get; set; }
 
         // activate actuators
         void stopFrame();

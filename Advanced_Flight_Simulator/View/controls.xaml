@@ -20,7 +20,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image x:Name="back" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="images/back.png" />
+            <Image x:Name="back" MouseLeftButtonUp="back_MouseLeftButtonUp" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="images/back.png" />
 
             <Image x:Name="play"  Grid.Row="0" Grid.Column="1" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="images/play.png" />
             <RadioButton x:Name="playRadioButton" IsChecked="{Binding !VM_ShouldStop}" Grid.Row="0" Grid.Column="1" Background="Transparent" BorderBrush="Transparent" Content="RadioButton" HorizontalAlignment="Center" VerticalAlignment="Center" Height="100" Width="100" Opacity="0"/>

@@ -16,7 +16,6 @@
         <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_Graph_Attribute}" Margin="5,51,241,0" Height="179" VerticalAlignment="Top" Grid.Row="1">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_GraphPoints}" DataFieldX="X" DataFieldY="Y"/>
-
             </oxy:Plot.Series>
         </oxy:Plot>
     </Grid>

@@ -32,7 +32,7 @@ namespace Advanced_Flight_Simulator
             InitializeComponent(); //call it from mainWindow.
             initDisplay(new Model_Flight_Client());
         }
-        public void initDisplay(Model_Flight_Client client)
+        private void initDisplay(Model_Flight_Client client)
         {
             IFlightModel model = new MyFlightModel(client);
             InitializeComponent(); //call it from mainWindow.
@@ -53,12 +53,22 @@ namespace Advanced_Flight_Simulator
         }
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            vm.VM_Start();
+            try
+            {
+                vm.VM_init();
+                vm.VM_Start();
+            }
+            catch (Exception)
+            {
+            MessageBoxImage icon = MessageBoxImage.Warning;
+            MessageBox.Show("File is not Valid", "Remainder - FlightGear", MessageBoxButton.OK, icon);
+            }
         }
 
         private void Button_Click_OpenFile(object sender, RoutedEventArgs e)
         {
-            vm.VM_init(vm.VM_openFile());
+            vm.VM_openFile();
+            //vm.VM_init(vm.VM_openFile());
         }
     }
 }

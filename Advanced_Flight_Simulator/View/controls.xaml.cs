@@ -29,7 +29,6 @@ namespace Advanced_Flight_Simulator
         {
             slider.Value = 0;
             pauseRadioButton.IsChecked = true;
-
         }
 
 
