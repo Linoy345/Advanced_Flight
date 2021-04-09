@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Data;
 using System.Net.Sockets;
+using implement;
 
 namespace Advanced_Flight_Simulator
 {
@@ -12,7 +13,9 @@ namespace Advanced_Flight_Simulator
     {
         public MainWindow()
         {
+            MangeDll.runDll();
             InitializeComponent();
+
         }
 
         private void Connect_botton(object sender1, RoutedEventArgs e)
