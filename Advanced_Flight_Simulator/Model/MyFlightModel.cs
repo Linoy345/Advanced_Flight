@@ -335,7 +335,7 @@ namespace Advanced_Flight_Simulator
                         GraphPoints = UpdateGraphPoint();
                         sendFrame();
                         //for check
-                       /* string s = getMostCorraltedFeature();
+                        /*string s = getMostCorraltedFeature();
                         Console.WriteLine("pearon - {0}", s);
 
                         Line.Line l = getLinearReg();

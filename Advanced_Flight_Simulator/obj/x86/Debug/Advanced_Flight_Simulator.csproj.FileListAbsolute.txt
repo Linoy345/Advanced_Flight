@@ -5,7 +5,6 @@ C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\bin\
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\bin\x86\Debug\OxyPlot.Wpf.dll
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\bin\x86\Debug\OxyPlot.xml
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\bin\x86\Debug\OxyPlot.Wpf.xml
-C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\obj\x86\Debug\Advanced_Flight_Simulator.csprojAssemblyReference.cache
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\obj\x86\Debug\View\controls.g.cs
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\obj\x86\Debug\View\GraphView.g.cs
 C:\Users\יונתן\Source\Repos\Advanced_Flight3\Advanced_Flight_Simulator\obj\x86\Debug\View\Indices.g.cs
