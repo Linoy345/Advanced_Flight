@@ -24,8 +24,6 @@ namespace Advanced_Flight_Simulator
         private GraphViewModel graph_vm;
         public DisplayWindow(string ip, string port)
         {
-            //MessageBoxImage icon = MessageBoxImage.Information;
-            //MessageBox.Show("Please open the FlightGear application", "Remainder - FlightGear", MessageBoxButton.OK, icon);
             Model_Flight_Client client = new Model_Flight_Client(ip, Int32.Parse(port));
             initDisplay(client);
         }
@@ -40,6 +38,9 @@ namespace Advanced_Flight_Simulator
             InitializeComponent(); //call it from mainWindow.
                                    //int port = 5400;
                                    //string ip = "127.0.0.1";
+            MessageBoxImage icon = MessageBoxImage.Information;
+            MessageBox.Show("Please open the FlightGear application", "Remainder - FlightGear", MessageBoxButton.OK, icon);
+
             vm = new FlightViewModel(model);
             graph_vm = new GraphViewModel(model);
             this.controls.DataContext = vm;

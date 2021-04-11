@@ -57,7 +57,8 @@ namespace Advanced_Flight_Simulator
 
             string s = intPtrToString(line);
             var splitLine = s.Split(',');
-            return new Line.Line(float.Parse(splitLine[0]), float.Parse(splitLine[1]));
+            Line.Line l = new Line.Line(float.Parse(splitLine[0]), float.Parse(splitLine[1]));
+            return l;
         }
 
         public static string intPtrToString(IntPtr intPtr)

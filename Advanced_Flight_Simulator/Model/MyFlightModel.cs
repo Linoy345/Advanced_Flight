@@ -77,7 +77,8 @@ namespace Advanced_Flight_Simulator
         }
         public double Direction
         {
-            get { return direction; }
+            get {
+                return direction; }
             set
             {
                 direction = value;
@@ -333,14 +334,14 @@ namespace Advanced_Flight_Simulator
                     { 
                         GraphPoints = UpdateGraphPoint();
                         sendFrame();
-
-                        string s = getMostCorraltedFeature();
+                        //for check
+                       /* string s = getMostCorraltedFeature();
                         Console.WriteLine("pearon - {0}", s);
 
-                        //Line.Line l = getLinearReg();
-                        //Console.WriteLine("a - {0}", l.a);
-                        //Console.WriteLine("b - {0}", l.b);
-
+                        Line.Line l = getLinearReg();
+                        Console.WriteLine("a - {0}", l.a);
+                        Console.WriteLine("b - {0}", l.b);
+                        */
                         // the same for the other sensors properties
                         Thread.Sleep((int)Frequency);// read the data in 4Hz
                     }
