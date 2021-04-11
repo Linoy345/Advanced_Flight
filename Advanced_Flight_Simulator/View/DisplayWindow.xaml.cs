@@ -24,8 +24,10 @@ namespace Advanced_Flight_Simulator
         private GraphViewModel graph_vm;
         public DisplayWindow(string ip, string port)
         {
-                Model_Flight_Client client = new Model_Flight_Client(ip, Int32.Parse(port));
-                initDisplay(client);
+            //MessageBoxImage icon = MessageBoxImage.Information;
+            //MessageBox.Show("Please open the FlightGear application", "Remainder - FlightGear", MessageBoxButton.OK, icon);
+            Model_Flight_Client client = new Model_Flight_Client(ip, Int32.Parse(port));
+            initDisplay(client);
         }
         public DisplayWindow()
         {
@@ -68,7 +70,6 @@ namespace Advanced_Flight_Simulator
         private void Button_Click_OpenFile(object sender, RoutedEventArgs e)
         {
             vm.VM_openFile();
-            //vm.VM_init(vm.VM_openFile());
         }
     }
 }

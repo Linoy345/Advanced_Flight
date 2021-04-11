@@ -109,7 +109,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="MangeDll.cs" />
+    <Compile Include="CorrelatedDll.cs" />
     <Compile Include="Model\Attribute.cs" />
     <Compile Include="Model\Line.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />

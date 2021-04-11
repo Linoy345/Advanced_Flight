@@ -143,7 +143,8 @@ namespace Advanced_Flight_Simulator
         }
         public int FrameId
         {
-            get { return frameId; }
+            get {
+                return frameId; }
             set
             {
                 frameId = value;
@@ -332,6 +333,14 @@ namespace Advanced_Flight_Simulator
                     { 
                         GraphPoints = UpdateGraphPoint();
                         sendFrame();
+
+                        string s = getMostCorraltedFeature();
+                        Console.WriteLine("pearon - {0}", s);
+
+                        //Line.Line l = getLinearReg();
+                        //Console.WriteLine("a - {0}", l.a);
+                        //Console.WriteLine("b - {0}", l.b);
+
                         // the same for the other sensors properties
                         Thread.Sleep((int)Frequency);// read the data in 4Hz
                     }
@@ -415,11 +424,18 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("FilePath");
             }
         }
+
+        //CALL FIRST TO getMostCorraltedFeature AND THEN TO getLinearReg
         public string getMostCorraltedFeature() //graph for yair
         {
             //what to do with index -1?
             return this.correlatedDll.getPearsonFeature(info.getIndex(GraphAttribute));
             //yair will use : info.getAttributeFromIndex(index);
+        }
+
+        public Line.Line getLinearReg() //graph for yair
+        {
+            return this.correlatedDll.getLine(info.getIndex(GraphAttribute));
         }
     }
 }

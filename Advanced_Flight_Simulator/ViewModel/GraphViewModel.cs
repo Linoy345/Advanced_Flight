@@ -39,6 +39,9 @@ namespace Advanced_Flight_Simulator
         {
             return model.getMostCorraltedFeature();
         }
-
+        public Line.Line VM_getLinearReg() //graph for yair
+        {
+            return this.model.getLinearReg();
+        }
     }
 }
