@@ -54,5 +54,7 @@ namespace Advanced_Flight_Simulator
         void stopFrame();
         void continueFrame();
         void changeFrame(int frameNum);
+        string getMostCorraltedFeature();
+
     }
 }

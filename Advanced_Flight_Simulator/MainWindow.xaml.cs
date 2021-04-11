@@ -12,7 +12,7 @@ namespace Advanced_Flight_Simulator
     {
         public MainWindow()
         {
-            MangeDll.runDll();
+           
             InitializeComponent();
 
         }

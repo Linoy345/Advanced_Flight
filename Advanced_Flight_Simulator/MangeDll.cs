@@ -4,16 +4,20 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using Line;
 
 namespace Advanced_Flight_Simulator
 {
-    public class MangeDll
+
+    public class CorrelatedDll
     {
+        IntPtr infoDll;
+
         [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Create(string fileName);
 
         [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr getCorlatedFeature(IntPtr a, string fileName);
+        public static extern IntPtr getCorlatedFeature(IntPtr a, int index);
 
 
         [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
@@ -29,16 +33,33 @@ namespace Advanced_Flight_Simulator
         public static extern void set(IntPtr str, string newString);
 
 
-        public static void runDll()
-        {
-            Console.WriteLine("Hello World!");
-            string fileName = "anomaly_flight.csv";
-            IntPtr a = Create(fileName);
+        [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
+        public static extern IntPtr getLineReg(IntPtr str, string col);
 
-            Console.WriteLine("Bye!1");
-            IntPtr stringCorelate = getCorlatedFeature(a, "rudder");
-            Console.WriteLine(intPtrToString(stringCorelate));
-            Console.WriteLine("Bye2!");
+
+        public CorrelatedDll(string fileName)
+        {
+            this.infoDll = Create(fileName);
+        }
+        public string getPearsonFeature(int index)
+        { 
+            IntPtr stringCorelate = getCorlatedFeature(this.infoDll, index);         
+            return intPtrToString(stringCorelate);
+        }
+
+        public Dictionary<string, Line.Line> getLine(List<string> attributesFeatures)
+        {
+            Dictionary<string, Line.Line> dictOfLineReg = new Dictionary<string, Line.Line>();
+            foreach (string nameOfFeature in attributesFeatures)
+            {
+                IntPtr line = getLineReg(this.infoDll, nameOfFeature);
+                string s = intPtrToString(line);
+                var splitLine = s.Split(',');
+                Line.Line l = new Line.Line(float.Parse(splitLine[0]), float.Parse(splitLine[1]));
+                dictOfLineReg.Add(nameOfFeature, l);
+
+            }
+            return dictOfLineReg;
         }
 
         public static string intPtrToString(IntPtr intPtr)

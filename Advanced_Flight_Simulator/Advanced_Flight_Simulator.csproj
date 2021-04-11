@@ -111,6 +111,7 @@
     </ApplicationDefinition>
     <Compile Include="MangeDll.cs" />
     <Compile Include="Model\Attribute.cs" />
+    <Compile Include="Model\Line.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />
     <Compile Include="View\controls.xaml.cs">
       <DependentUpon>controls.xaml</DependentUpon>
@@ -182,13 +183,16 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="anomaly_flight.csv" />
     <None Include="bin\Debug\Advanced_Flight_Simulator.exe.config" />
     <None Include="bin\Debug\reg_flight.csv" />
+    <None Include="bin\x86\Debug\Advanced_Flight_Simulator.exe.config" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="reg_flight.csv" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -232,11 +236,15 @@
   <ItemGroup>
     <Content Include="bin\Debug\Advanced_Flight_Simulator.exe" />
     <Content Include="bin\Debug\Advanced_Flight_Simulator.pdb" />
+    <Content Include="bin\x86\Debug\Advanced_Flight_Simulator.exe" />
+    <Content Include="bin\x86\Debug\Advanced_Flight_Simulator.pdb" />
+    <Content Include="plugins\anomalyDetectorDll3.dll" />
     <Resource Include="View\images\Main_Window_Background.jpg" />
     <Resource Include="bin\Debug\playback_small.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
+    <Folder Include="bin\x86\Release\" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

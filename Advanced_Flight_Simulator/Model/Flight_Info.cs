@@ -91,7 +91,7 @@ namespace Advanced_Flight_Simulator
             }
             return new List<string>();
         }
-        public Dictionary<string,string> get_row(int row)
+        public Dictionary<string, string> get_row(int row)
         {
             return this.rows[row];
         }
@@ -106,7 +106,7 @@ namespace Advanced_Flight_Simulator
                 }
             }
             return string.Empty;
-               
+
         }
 
         /*
@@ -128,11 +128,34 @@ namespace Advanced_Flight_Simulator
         public List<string> get_attribute_names()
         {
             List<string> names = new List<string>();
-            foreach(Attribute attribue in attributes)
+            foreach (var attribue in rows.First())
             {
-                names.Add(attribue.name);
+                names.Add(attribue.Key);
             }
             return names;
+        }
+
+        public int getIndex(string name)
+        {
+            int i = 0;
+            foreach (var attribute in rows.First())
+            {
+                if (name.Equals(attribute.Key))
+                {
+                    return i;
+                }
+                i++;
+            }
+            return -1;
+        }
+
+        public string getAttributeFromIndex(string name)
+        {
+            if(Int32.Parse(name) == -1)
+            {
+                return String.Empty;
+            }
+            return rows[0].ElementAt(Int32.Parse(name)).Key;
         }
     }
 }

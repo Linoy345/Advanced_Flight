@@ -14,12 +14,15 @@ namespace Advanced_Flight_Simulator
     {
         private Flight_Info info;
         private IClient client;
+        private CorrelatedDll correlatedDll;
+
 
         volatile private bool shouldStop;
         volatile private int frameId;
         volatile private bool finishedStart; // Prevent from oppening multiple thread in start.
         volatile private string filePath;
 
+        volatile private List<string> attributeNames;
         volatile private List<DataPoint> graphPoints;
         volatile private string graphAttribute;
 
@@ -46,6 +49,7 @@ namespace Advanced_Flight_Simulator
             Frequency = 1;
             info = new Flight_Info();
             this.client = client;
+            attributeNames = new List<string>();
             graphPoints = new List<DataPoint>();
             FinishedStart = true;
             ShouldStop = false;
@@ -307,13 +311,16 @@ namespace Advanced_Flight_Simulator
             if (FilePath != string.Empty)
             {
                 info.init_Flight_Info(FilePath);
+                AttributesNames = info.get_attribute_names();
+                correlatedDll = new CorrelatedDll(FilePath);
                 NotifyPropertyChanged(string.Empty);
                 NotifyPropertyChanged("AttributesNames");
                 NotifyPropertyChanged("RowCount");
+
             }
 
         }
-
+            
         public void start()
         {
             if (FinishedStart)
@@ -359,7 +366,11 @@ namespace Advanced_Flight_Simulator
         {
             get
             {
-                return info.get_attribute_names();
+                return attributeNames;
+            }
+            set
+            {
+                attributeNames = value;
             }
         }
         public string GraphAttribute
@@ -385,7 +396,8 @@ namespace Advanced_Flight_Simulator
             if (openFileDialog.ShowDialog() == true)
             {   //(csv_path, xml_path);
                 FilePath = openFileDialog.FileName;
-            } else
+            }
+            else
             {
                 FilePath = String.Empty;
             }
@@ -398,11 +410,16 @@ namespace Advanced_Flight_Simulator
                 return filePath;
             }
             set
-            {
+            {   
                 this.filePath = value;
                 NotifyPropertyChanged("FilePath");
             }
         }
-
+        public string getMostCorraltedFeature() //graph for yair
+        {
+            //what to do with index -1?
+            return this.correlatedDll.getPearsonFeature(info.getIndex(GraphAttribute));
+            //yair will use : info.getAttributeFromIndex(index);
+        }
     }
 }

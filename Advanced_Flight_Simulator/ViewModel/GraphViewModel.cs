@@ -35,5 +35,10 @@ namespace Advanced_Flight_Simulator
             }
         }
 
+        public string VM_getMostCorraltedFeature() //go over the dictionaray, every pair is the "me" and ny corrlated featuer
+        {
+            return model.getMostCorraltedFeature();
+        }
+
     }
 }
