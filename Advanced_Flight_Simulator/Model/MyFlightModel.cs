@@ -24,7 +24,10 @@ namespace Advanced_Flight_Simulator
 
         volatile private List<string> attributeNames;
         volatile private List<DataPoint> graphPoints;
+        volatile private List<DataPoint> correlated_GraphPoints;
         volatile private string graphAttribute;
+        volatile private string correlated_Attribute;
+
 
         private double throttle;
         private double rudder;
@@ -296,8 +299,6 @@ namespace Advanced_Flight_Simulator
             if (!ShouldStop)
             {
                 client.write(info.get_row_string(FrameId));
-                RefreshIndices();
-                updateJoistick();
                 FrameId++;
             }
         }
@@ -320,18 +321,35 @@ namespace Advanced_Flight_Simulator
             }
 
         }
-            
+        private void updateGraphs()
+        {
+            GraphPoints = getGraphPoint(GraphAttribute);
+            Correlated_GraphPoints = getGraphPoint(correlated_Attribute);
+        }
         public void start()
         {
             if (FinishedStart)
             {
+
                 new Thread(delegate ()
                 {
                     FinishedStart = false;
                     while (frameId < info.row_count())
-                    { 
-                        GraphPoints = UpdateGraphPoint();
+                    {
                         sendFrame();
+                        // the same for the other sensors properties
+                        Thread.Sleep((int)Frequency);// read the data in 4Hz
+                    }
+                    FinishedStart = true;
+                }).Start();
+                new Thread(delegate ()
+                {
+                    FinishedStart = false;
+                    while (frameId < info.row_count())
+                    {
+                        updateGraphs();
+                        RefreshIndices();
+                        updateJoistick();
                         // the same for the other sensors properties
                         Thread.Sleep((int)Frequency);// read the data in 4Hz
                     }
@@ -341,15 +359,19 @@ namespace Advanced_Flight_Simulator
         }
 
         //Yair addition:
-        private List<DataPoint> UpdateGraphPoint()
+        private List<DataPoint> getGraphPoint(string header)
         {
             List<DataPoint> currentList = new List<DataPoint>();
-            for (int frame = 0; frame < frameId; frame++)
+            if (!String.IsNullOrEmpty(header))
             {
-                currentList.Add(new DataPoint(frame, Double.Parse(info.get_value(frame, graphAttribute))));
+                for (int frame = 0; frame < frameId; frame++)
+                {
+                    currentList.Add(new DataPoint(frame, Double.Parse(info.get_value(frame, header))));
+                }
             }
-            return currentList;
+                return currentList;
         }
+
         public List<DataPoint> GraphPoints
         {
             get
@@ -360,6 +382,18 @@ namespace Advanced_Flight_Simulator
             {
                 graphPoints = value;
                 NotifyPropertyChanged("GraphPoints");
+            }
+        }
+        public List<DataPoint> Correlated_GraphPoints
+        {
+            get
+            {
+                return correlated_GraphPoints;
+            }
+            set
+            {
+                correlated_GraphPoints = value;
+                NotifyPropertyChanged("Correlated_GraphPoints");
             }
         }
         public List<string> AttributesNames
@@ -383,6 +417,23 @@ namespace Advanced_Flight_Simulator
             {
                 graphAttribute = value;
                 NotifyPropertyChanged("GraphAttribute");
+                new Thread(delegate ()
+                {
+                    Correlated_Attribute = getMostCorraltedFeature();
+                }).Start();
+            }
+        }
+
+        public string Correlated_Attribute
+        {
+            get
+            {
+                return correlated_Attribute;
+            }
+            set
+            {
+                correlated_Attribute = value;
+                NotifyPropertyChanged("Correlated_Attribute");
             }
         }
 
@@ -417,8 +468,10 @@ namespace Advanced_Flight_Simulator
         }
         public string getMostCorraltedFeature() //graph for yair
         {
+            int index = info.getIndex(GraphAttribute);
+            string correlatedIndex = this.correlatedDll.getPearsonFeature(index);
             //what to do with index -1?
-            return this.correlatedDll.getPearsonFeature(info.getIndex(GraphAttribute));
+            return info.getAttributeFromIndex(Int32.Parse(correlatedIndex));
             //yair will use : info.getAttributeFromIndex(index);
         }
     }

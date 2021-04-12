@@ -48,7 +48,7 @@ namespace Advanced_Flight_Simulator
             try
             {
                 string[] lines = File.ReadAllLines(csv_path);
-                lines = lines.Skip(1).ToArray();
+                lines = lines.Skip(0).ToArray();
                 int coulumn_index = 0;
                 int row_index = 0;
                 string current_value;
@@ -149,13 +149,13 @@ namespace Advanced_Flight_Simulator
             return -1;
         }
 
-        public string getAttributeFromIndex(string name)
+        public string getAttributeFromIndex(int index)
         {
-            if(Int32.Parse(name) == -1)
+            if(index == -1)
             {
                 return String.Empty;
             }
-            return rows[0].ElementAt(Int32.Parse(name)).Key;
+            return rows[0].ElementAt(index).Key;
         }
     }
 }
