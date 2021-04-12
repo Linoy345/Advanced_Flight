@@ -8,10 +8,11 @@ using Line;
 
 namespace Advanced_Flight_Simulator
 {
-
     public class CorrelatedDll
     {
         IntPtr infoDll;
+        //private int feature1;
+        //private int feature2;
 
         [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
         public static extern IntPtr Create(string fileName);
@@ -34,7 +35,7 @@ namespace Advanced_Flight_Simulator
 
 
         [DllImport("anomalyDetectorDll3.dll", CallingConvention = CallingConvention.Cdecl)]
-        public static extern IntPtr getLineReg(IntPtr str, string col);
+        public static extern IntPtr getLineReg(IntPtr str, int index1, int index2);
 
 
         public CorrelatedDll(string fileName)
@@ -42,24 +43,22 @@ namespace Advanced_Flight_Simulator
             this.infoDll = Create(fileName);
         }
         public string getPearsonFeature(int index)
-        { 
-            IntPtr stringCorelate = getCorlatedFeature(this.infoDll, index);         
-            return intPtrToString(stringCorelate);
+        {
+            IntPtr stringCorelate = getCorlatedFeature(this.infoDll, index);  
+            string ret = intPtrToString(stringCorelate);
+            //this.feature1 = index;
+            //this.feature2 = Int32.Parse(ret);
+            return ret;
         }
 
-        public Dictionary<string, Line.Line> getLine(List<string> attributesFeatures)
+        public Line.Line getLine(int index)
         {
-            Dictionary<string, Line.Line> dictOfLineReg = new Dictionary<string, Line.Line>();
-            foreach (string nameOfFeature in attributesFeatures)
-            {
-                IntPtr line = getLineReg(this.infoDll, nameOfFeature);
-                string s = intPtrToString(line);
-                var splitLine = s.Split(',');
-                Line.Line l = new Line.Line(float.Parse(splitLine[0]), float.Parse(splitLine[1]));
-                dictOfLineReg.Add(nameOfFeature, l);
+            IntPtr line = getLineReg(this.infoDll, index, Int32.Parse(getPearsonFeature(index)));
 
-            }
-            return dictOfLineReg;
+            string s = intPtrToString(line);
+            var splitLine = s.Split(',');
+            Line.Line l = new Line.Line(float.Parse(splitLine[0]), float.Parse(splitLine[1]));
+            return l;
         }
 
         public static string intPtrToString(IntPtr intPtr)

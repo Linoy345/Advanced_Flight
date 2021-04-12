@@ -14,6 +14,7 @@ namespace Advanced_Flight_Simulator
         {
            
             InitializeComponent();
+            
 
         }
 
@@ -23,7 +24,8 @@ namespace Advanced_Flight_Simulator
             {
                 if (!String.IsNullOrEmpty(Ip.Text) && !String.IsNullOrEmpty(Port.Text))
                 {
-                    DisplayWindow displayWindow = new DisplayWindow(Ip.Text, Port.Text);
+                   DisplayWindow displayWindow = new DisplayWindow(Ip.Text, Port.Text);
+                    
                     displayWindow.Show();
                 }
             }

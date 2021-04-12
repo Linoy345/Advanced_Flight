@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Line;
 
 namespace Advanced_Flight_Simulator
 {
@@ -58,6 +59,7 @@ namespace Advanced_Flight_Simulator
         void continueFrame();
         void changeFrame(int frameNum);
         string getMostCorraltedFeature();
+        Line.Line getLinearReg(); 
 
     }
 }
