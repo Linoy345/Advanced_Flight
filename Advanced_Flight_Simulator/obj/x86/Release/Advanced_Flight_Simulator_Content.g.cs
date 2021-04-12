@@ -10,6 +10,8 @@
 
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/advanced_flight_simulator.exe")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/debug/advanced_flight_simulator.pdb")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/x86/debug/advanced_flight_simulator.exe")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("bin/x86/debug/advanced_flight_simulator.pdb")]
 [assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("plugins/anomalydetectordll3.dll")]
 
 

@@ -5,17 +5,26 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Advanced_Flight_Simulator"
              xmlns:oxy="http://oxyplot.org/wpf"
-             mc:Ignorable="d" Height="326.666" Width="458.334">
-    <Grid Height="321" Margin="7,8,-40.333,-2.333" VerticalAlignment="Top" HorizontalAlignment="Left" Width="492">
+             mc:Ignorable="d" Height="491.666" Width="569.333">
+    <Grid Height="437" Margin="28,68,-33,-13.667" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="159*"/>
+            <ColumnDefinition Width="10*"/>
+        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="17*"/>
             <RowDefinition Height="90*"/>
         </Grid.RowDefinitions>
-        <ListBox Name="options"  Background="Transparent" SelectedIndex="1" SelectedValue="{Binding VM_Graph_Attribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,4,21" Width="226" Height="247" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" />
+        <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_Graph_Attribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,95,109.333" Width="226" Height="247" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" />
 
-        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_Graph_Attribute}" Margin="5,51,241,0" Height="179" VerticalAlignment="Top" Grid.Row="1">
+        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_Graph_Attribute}" Margin="9,34,410,0" Height="200" VerticalAlignment="Top" Grid.RowSpan="2">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_GraphPoints}" DataFieldX="X" DataFieldY="Y"/>
+            </oxy:Plot.Series>
+        </oxy:Plot>
+        <oxy:Plot x:Name="CorrelatedPlot" Background="Transparent"  Title="{Binding VM_Correlated_Attribute}" Margin="-23,0,403,-1.667" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1">
+            <oxy:Plot.Series>
+                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_Correlated_GraphPoints}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
     </Grid>
