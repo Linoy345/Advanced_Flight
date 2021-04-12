@@ -48,9 +48,16 @@ namespace Advanced_Flight_Simulator
         int RowCount { get; }
         List<string> AttributesNames { get; }
         string GraphAttribute { set; get; }
-        List<DataPoint> GraphPoints { get; set; }
-        List<DataPoint> Correlated_GraphPoints { get; set; }
         string Correlated_Attribute { get; set; }
+        List<DataPoint> MainGraph { get; set; }
+        List<DataPoint> CorrelatedGraph { get; set; }
+        List<DataPoint> LinePoints { get; set; }
+        List<DataPoint> AttributesGraph { get; set; }
+        List<DataPoint> LatestPoints { get; set; }
+
+        
+
+
 
         string FilePath { get; set; }
 

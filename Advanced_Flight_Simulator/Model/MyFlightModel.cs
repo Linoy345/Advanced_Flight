@@ -16,15 +16,19 @@ namespace Advanced_Flight_Simulator
         private IClient client;
         private CorrelatedDll correlatedDll;
 
-
+        volatile private bool showCorrelationGraphs;
         volatile private bool shouldStop;
         volatile private int frameId;
         volatile private bool finishedStart; // Prevent from oppening multiple thread in start.
         volatile private string filePath;
 
         volatile private List<string> attributeNames;
-        volatile private List<DataPoint> graphPoints;
-        volatile private List<DataPoint> correlated_GraphPoints;
+        volatile private List<DataPoint> linePoints;
+        volatile private List<DataPoint> mainGraph;
+        volatile private List<DataPoint> correlated_Graph;
+        volatile private List<DataPoint> attributesGraph;
+        volatile private List<DataPoint> latestPoints;
+
         volatile private string graphAttribute;
         volatile private string correlated_Attribute;
 
@@ -52,10 +56,13 @@ namespace Advanced_Flight_Simulator
             Frequency = 1;
             info = new Flight_Info();
             this.client = client;
-            attributeNames = new List<string>();
-            graphPoints = new List<DataPoint>();
+            AttributesNames = new List<string>();
+            MainGraph = new List<DataPoint>();
+            LinePoints = new List<DataPoint>();
+            LatestPoints = new List<DataPoint>();
             FinishedStart = true;
             ShouldStop = false;
+            showCorrelationGraphs = false;
             x = 0;
             y = 0;
         }
@@ -80,8 +87,10 @@ namespace Advanced_Flight_Simulator
         }
         public double Direction
         {
-            get {
-                return direction; }
+            get
+            {
+                return direction;
+            }
             set
             {
                 direction = value;
@@ -101,8 +110,8 @@ namespace Advanced_Flight_Simulator
         public double Roll
         {
             get { return roll; }
-          
-            set 
+
+            set
             {
                 roll = value;
                 NotifyPropertyChanged("Roll");
@@ -147,8 +156,10 @@ namespace Advanced_Flight_Simulator
         }
         public int FrameId
         {
-            get {
-                return frameId; }
+            get
+            {
+                return frameId;
+            }
             set
             {
                 frameId = value;
@@ -205,7 +216,7 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Y");
             }
         }
-        
+
         public double Rudder
         {
             get
@@ -229,12 +240,12 @@ namespace Advanced_Flight_Simulator
             }
             set
             {
-                if(value >= 0 && value <= 1)
+                if (value >= 0 && value <= 1)
                 {
                     throttle = value;
                     NotifyPropertyChanged("Throttle");
                 }
-                
+
             }
         }
 
@@ -295,7 +306,7 @@ namespace Advanced_Flight_Simulator
             stopFrame();
             FrameId = 0;
         }
-        
+
         public void sendFrame()
         {
             if (!ShouldStop)
@@ -315,7 +326,7 @@ namespace Advanced_Flight_Simulator
             {
                 info.init_Flight_Info(FilePath);
                 AttributesNames = info.get_attribute_names();
-                correlatedDll = new CorrelatedDll(FilePath);
+                //correlatedDll = new CorrelatedDll(FilePath);
                 NotifyPropertyChanged(string.Empty);
                 NotifyPropertyChanged("AttributesNames");
                 NotifyPropertyChanged("RowCount");
@@ -323,16 +334,69 @@ namespace Advanced_Flight_Simulator
             }
 
         }
+        private void updateLineGraph()
+        {
+            LinePoints = generateLinePoints();
+            AttributesGraph = generateGraphAttributes();
+        }
+        private List<DataPoint> generateLatestsPoints()
+        {
+            float x, y;
+            int frame = 0;
+            List<DataPoint> pointsList = new List<DataPoint>();
+            if(FrameId > 300)
+            {
+                frame = frameId - 300;
+            }
+                for(; frame < FrameId; frame++)
+                {
+                    x = float.Parse(info.get_value(frame, GraphAttribute));
+                    y = float.Parse(info.get_value(frame, Correlated_Attribute));
+                    pointsList.Add(new DataPoint(x, y));
+                }
+            return pointsList;
+        }
+        private List<DataPoint> generateGraphAttributes()
+        {
+            double x, y;
+            List<DataPoint> pointsList = new List<DataPoint>();
+            for (int row = 0; row < RowCount; row++)
+            {
+                x = Double.Parse(info.get_value(row, GraphAttribute));
+                y = Double.Parse(info.get_value(row, Correlated_Attribute));
+                pointsList.Add(new DataPoint(x, y));
+            }
+            return pointsList;
+        }
+        private List<DataPoint> generateLinePoints()
+        {
+            float maxX = 0, minX = float.MaxValue;
+            List<DataPoint> pointsList = new List<DataPoint>();
+            Line.Line line = getLinearReg();
+            foreach (var value in info.get_attribute(GraphAttribute))
+            {
+                if (float.Parse(value) < minX)
+                {
+                    minX = float.Parse(value);
+                }
+                if (float.Parse(value) > maxX)
+                {
+                    maxX = float.Parse(value);
+                }
+            }
+            pointsList.Add(new DataPoint(minX, line.f(minX)));
+            pointsList.Add(new DataPoint(maxX, line.f(maxX)));
+            return pointsList;
+        }
         private void updateGraphs()
         {
-            GraphPoints = getGraphPoint(GraphAttribute);
-            Correlated_GraphPoints = getGraphPoint(correlated_Attribute);
+            MainGraph = getGraphPoint(GraphAttribute);
+            CorrelatedGraph = getGraphPoint(correlated_Attribute);
         }
         public void start()
         {
             if (FinishedStart)
             {
-
                 new Thread(delegate ()
                 {
                     FinishedStart = false;
@@ -354,16 +418,18 @@ namespace Advanced_Flight_Simulator
                 }).Start();
                 new Thread(delegate ()
                 {
-                    FinishedStart = false;
                     while (frameId < info.row_count())
                     {
                         updateGraphs();
                         RefreshIndices();
                         updateJoistick();
+                        if (showCorrelationGraphs)
+                        {
+                            LatestPoints = generateLatestsPoints();
+                        }
                         // the same for the other sensors properties
-                        Thread.Sleep((int)Frequency);// read the data in 4Hz
+                        Thread.Sleep((int)Frequency); // read the data in 4Hz
                     }
-                    FinishedStart = true;
                 }).Start();
             }
         }
@@ -371,39 +437,55 @@ namespace Advanced_Flight_Simulator
         //Yair addition:
         private List<DataPoint> getGraphPoint(string header)
         {
+            string valueString;
+            double currentValue;
             List<DataPoint> currentList = new List<DataPoint>();
             if (!String.IsNullOrEmpty(header))
             {
                 for (int frame = 0; frame < frameId; frame++)
                 {
-                    currentList.Add(new DataPoint(frame, Double.Parse(info.get_value(frame, header))));
+                    valueString = info.get_value(frame, header);
+                    currentValue = Double.Parse(valueString);
+                    currentList.Add(new DataPoint(frame, currentValue));
                 }
             }
-                return currentList;
+            return currentList;
         }
 
-        public List<DataPoint> GraphPoints
+        public List<DataPoint> MainGraph
         {
             get
             {
-                return graphPoints;
+                return mainGraph;
             }
             set
             {
-                graphPoints = value;
-                NotifyPropertyChanged("GraphPoints");
+                mainGraph = value;
+                NotifyPropertyChanged("MainGraph");
             }
         }
-        public List<DataPoint> Correlated_GraphPoints
+        public List<DataPoint> CorrelatedGraph
         {
             get
             {
-                return correlated_GraphPoints;
+                return correlated_Graph;
             }
             set
             {
-                correlated_GraphPoints = value;
-                NotifyPropertyChanged("Correlated_GraphPoints");
+                correlated_Graph = value;
+                NotifyPropertyChanged("CorrelatedGraph");
+            }
+        }
+        public List<DataPoint> AttributesGraph
+        {
+            get
+            {
+                return attributesGraph;
+            }
+            set
+            {
+                attributesGraph = value;
+                NotifyPropertyChanged("AttributesGraph");
             }
         }
         public List<string> AttributesNames
@@ -415,6 +497,7 @@ namespace Advanced_Flight_Simulator
             set
             {
                 attributeNames = value;
+                NotifyPropertyChanged("AttributesNames");
             }
         }
         public string GraphAttribute
@@ -430,6 +513,7 @@ namespace Advanced_Flight_Simulator
                 new Thread(delegate ()
                 {
                     Correlated_Attribute = getMostCorraltedFeature();
+                    updateLineGraph();
                 }).Start();
             }
         }
@@ -443,6 +527,7 @@ namespace Advanced_Flight_Simulator
             set
             {
                 correlated_Attribute = value;
+                showCorrelationGraphs = true;
                 NotifyPropertyChanged("Correlated_Attribute");
             }
         }
@@ -457,6 +542,7 @@ namespace Advanced_Flight_Simulator
             if (openFileDialog.ShowDialog() == true)
             {   //(csv_path, xml_path);
                 FilePath = openFileDialog.FileName;
+                correlatedDll = new CorrelatedDll(FilePath);
             }
             else
             {
@@ -471,12 +557,36 @@ namespace Advanced_Flight_Simulator
                 return filePath;
             }
             set
-            {   
-                this.filePath = value;
+            {
+                filePath = value;
                 NotifyPropertyChanged("FilePath");
             }
         }
 
+        public List<DataPoint> LinePoints
+        {
+            get
+            {
+                return linePoints;
+            }
+            set
+            {
+                linePoints = value;
+                NotifyPropertyChanged("LinePoints");
+            }
+        }
+        public List<DataPoint> LatestPoints
+        {
+            get
+            {
+                return latestPoints;
+            }
+            set
+            {
+                latestPoints = value;
+                NotifyPropertyChanged("LatestPoints");
+            }
+        }
         //CALL FIRST TO getMostCorraltedFeature AND THEN TO getLinearReg
         public string getMostCorraltedFeature() //graph for yair
         {

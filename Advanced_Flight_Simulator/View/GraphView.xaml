@@ -5,26 +5,35 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Advanced_Flight_Simulator"
              xmlns:oxy="http://oxyplot.org/wpf"
-             mc:Ignorable="d" Height="491.666" Width="569.333">
-    <Grid Height="437" Margin="28,68,-33,-13.667" VerticalAlignment="Top" HorizontalAlignment="Left" Width="665">
+             mc:Ignorable="d" Height="715.666" Width="826">
+    <Grid Height="552" Margin="28,28,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="712">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="159*"/>
             <ColumnDefinition Width="10*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="17*"/>
-            <RowDefinition Height="90*"/>
+            <RowDefinition Height="88*"/>
+            <RowDefinition Height="145*"/>
+            <RowDefinition Height="319*"/>
         </Grid.RowDefinitions>
-        <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_Graph_Attribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,95,109.333" Width="226" Height="247" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.Row="1" />
+        <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_GraphAttribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,10,141" Width="226" Height="381" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.RowSpan="3" />
 
-        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_Graph_Attribute}" Margin="9,34,410,0" Height="200" VerticalAlignment="Top" Grid.RowSpan="2">
+
+        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_GraphAttribute}" Margin="0,0,329,-57" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="2">
             <oxy:Plot.Series>
-                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_GraphPoints}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_MainGraph}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
-        <oxy:Plot x:Name="CorrelatedPlot" Background="Transparent"  Title="{Binding VM_Correlated_Attribute}" Margin="-23,0,403,-1.667" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1">
+        <oxy:Plot x:Name="CorrelatedPlot" Background="Transparent"  Title="{Binding VM_CorrelatedAttribute}" Margin="0,0,256,12.667" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.RowSpan="2">
             <oxy:Plot.Series>
-                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_Correlated_GraphPoints}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_CorrelatedGraph}" DataFieldX="X" DataFieldY="Y"/>
+            </oxy:Plot.Series>
+        </oxy:Plot>
+        <oxy:Plot x:Name="LinePlot" Background="Transparent" TitleColor="Black" Title="LinePlot" Margin="0,0,314,144" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1" Grid.RowSpan="2">
+            <oxy:Plot.Series>
+                <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="1" MarkerFill="Brown" ItemsSource="{Binding VM_AttributesGraph}" DataFieldX="X" DataFieldY="Y"/>                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" Color="Red" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="3" MarkerFill="Red" ItemsSource="{Binding VM_LatestPoints}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
     </Grid>

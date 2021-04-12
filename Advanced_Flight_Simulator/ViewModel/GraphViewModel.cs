@@ -18,7 +18,7 @@ namespace Advanced_Flight_Simulator
 
         }
         
-        public string VM_Graph_Attribute
+        public string VM_GraphAttribute
         {
             get { return model.GraphAttribute; }
             set
@@ -26,7 +26,7 @@ namespace Advanced_Flight_Simulator
                 model.GraphAttribute = value;
             }
         }
-        public string VM_Correlated_Attribute
+        public string VM_CorrelatedAttribute
         {
             get { return model.Correlated_Attribute; }
             set
@@ -35,19 +35,42 @@ namespace Advanced_Flight_Simulator
             }
         }
         
-        public List<DataPoint> VM_GraphPoints
+
+        public List<DataPoint> VM_MainGraph
         {
             get
             {
-                return model.GraphPoints;
+                return model.MainGraph;
+            }
+        }
+        public List<DataPoint> VM_LinePoints
+        {
+            get
+            {
+                return model.LinePoints;
             }
         }
 
-        public List<DataPoint> VM_Correlated_GraphPoints
+        public List<DataPoint> VM_CorrelatedGraph
         {
             get
             {
-                return model.Correlated_GraphPoints;
+                return model.CorrelatedGraph;
+            }
+        }
+
+        public List<DataPoint> VM_AttributesGraph
+        {
+            get
+            {
+                return model.AttributesGraph;
+            }
+        }
+        public List<DataPoint> VM_LatestPoints
+        {
+            get
+            {
+                return model.LatestPoints;
             }
         }
         public string VM_getMostCorraltedFeature() //go over the dictionaray, every pair is the "me" and ny corrlated featuer

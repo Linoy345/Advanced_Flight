@@ -48,7 +48,7 @@ namespace Advanced_Flight_Simulator
             try
             {
                 string[] lines = File.ReadAllLines(csv_path);
-                lines = lines.Skip(0).ToArray();
+                lines = lines.Skip(1).ToArray();
                 int coulumn_index = 0;
                 int row_index = 0;
                 string current_value;
