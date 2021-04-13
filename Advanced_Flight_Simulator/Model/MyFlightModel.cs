@@ -60,6 +60,7 @@ namespace Advanced_Flight_Simulator
             MainGraph = new List<DataPoint>();
             LinePoints = new List<DataPoint>();
             LatestPoints = new List<DataPoint>();
+            CorrelatedGraph = new List<DataPoint>();
             FinishedStart = true;
             ShouldStop = false;
             showCorrelationGraphs = false;
@@ -309,7 +310,7 @@ namespace Advanced_Flight_Simulator
 
         public void sendFrame()
         {
-            if (!ShouldStop)
+            if (!ShouldStop && FrameId < RowCount)
             {
                 client.write(info.get_row_string(FrameId));
                 FrameId++;
@@ -400,7 +401,7 @@ namespace Advanced_Flight_Simulator
                 new Thread(delegate ()
                 {
                     FinishedStart = false;
-                    while (frameId < info.row_count())
+                    while (FrameId < info.row_count())
                     {
                         sendFrame();
                         //for check
@@ -418,9 +419,10 @@ namespace Advanced_Flight_Simulator
                 }).Start();
                 new Thread(delegate ()
                 {
-                    while (frameId < info.row_count())
+                    while (FrameId < info.row_count())
                     {
-                        updateGraphs();
+                        NotifyPropertyChanged("MainGraph");
+                        NotifyPropertyChanged("CorrelatedGraph");
                         RefreshIndices();
                         updateJoistick();
                         if (showCorrelationGraphs)
@@ -442,7 +444,7 @@ namespace Advanced_Flight_Simulator
             List<DataPoint> currentList = new List<DataPoint>();
             if (!String.IsNullOrEmpty(header)) 
             {
-                for (int frame = 0; frame < frameId; frame++)
+                for (int frame = 0; frame < RowCount; frame++)
                 {
                     valueString = info.get_value(frame, header);
                     currentValue = Double.Parse(valueString);
@@ -456,7 +458,7 @@ namespace Advanced_Flight_Simulator
         {
             get
             {
-                return mainGraph;
+                return mainGraph.GetRange(0, FrameId);
             }
             set
             {
@@ -468,7 +470,7 @@ namespace Advanced_Flight_Simulator
         {
             get
             {
-                return correlated_Graph;
+                return correlated_Graph.GetRange(0, FrameId);
             }
             set
             {
@@ -513,6 +515,7 @@ namespace Advanced_Flight_Simulator
                 new Task(delegate ()
                 {
                     Correlated_Attribute = getMostCorraltedFeature();
+                    updateGraphs();
                     updateLineGraph();
                 }).Start();
             }

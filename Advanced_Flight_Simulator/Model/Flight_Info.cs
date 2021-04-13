@@ -117,7 +117,7 @@ namespace Advanced_Flight_Simulator
         }
         public int row_count()
         {
-            return this.rows.Count();
+            return this.rows.Count() - 1;
         }
         public int attribute_count()
         {

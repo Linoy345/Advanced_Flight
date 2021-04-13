@@ -56,21 +56,21 @@ namespace Advanced_Flight_Simulator
         }
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                vm.VM_init();
-                vm.VM_Start();
-            }
-            catch (Exception)
-            {
-            MessageBoxImage icon = MessageBoxImage.Warning;
-            MessageBox.Show("File is not Valid", "Remainder - FlightGear", MessageBoxButton.OK, icon);
-            }
+            vm.VM_Start();
         }
 
         private void Button_Click_OpenFile(object sender, RoutedEventArgs e)
         {
-            vm.VM_openFile();
+            try
+            {
+                vm.VM_openFile();
+                vm.VM_init();
+            }
+            catch (Exception)
+            {
+                MessageBoxImage icon = MessageBoxImage.Warning;
+                MessageBox.Show("File is not Valid", "Remainder - FlightGear", MessageBoxButton.OK, icon);
+            }
         }
 
         private void Graph_Loaded(object sender, RoutedEventArgs e)

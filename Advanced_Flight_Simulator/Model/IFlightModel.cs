@@ -53,7 +53,9 @@ namespace Advanced_Flight_Simulator
         List<DataPoint> CorrelatedGraph { get; set; }
         List<DataPoint> LinePoints { get; set; }
         List<DataPoint> AttributesGraph { get; set; }
-        List<DataPoint> LatestPoints { get; set; }
+        List<DataPoint> LatestPoints { get;}
+
+        //List<DataPoint> LatestPoints { get; set; }
 
         
 
