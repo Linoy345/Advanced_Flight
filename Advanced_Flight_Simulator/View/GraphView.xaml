@@ -19,7 +19,7 @@
         <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_GraphAttribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,10,141" Width="226" Height="381" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.RowSpan="3" />
 
 
-        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_GraphAttribute}" Margin="0,0,329,-57" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="2">
+        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_GraphAttribute}" Margin="0,0,329,34" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="2">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_MainGraph}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
@@ -29,7 +29,7 @@
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_CorrelatedGraph}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
-        <oxy:Plot x:Name="LinePlot" Background="Transparent" TitleColor="Black" Title="LinePlot" Margin="0,0,314,144" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1" Grid.RowSpan="2">
+        <oxy:Plot x:Name="LinePlot" Background="Transparent" TitleColor="Black" Title="LinePlot" Margin="0,0,327,165" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1" Grid.RowSpan="2">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="1" MarkerFill="Brown" ItemsSource="{Binding VM_AttributesGraph}" DataFieldX="X" DataFieldY="Y"/>                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
                 <oxy:LineSeries Background="Transparent" Color="Red" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>

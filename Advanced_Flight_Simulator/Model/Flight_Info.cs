@@ -48,12 +48,11 @@ namespace Advanced_Flight_Simulator
             try
             {
                 string[] lines = File.ReadAllLines(csv_path);
-                lines = lines.Skip(1).ToArray();
+                lines = lines.ToArray();
                 int coulumn_index = 0;
                 int row_index = 0;
                 string current_value;
                 string current_name;
-
                 foreach (var line in lines)
                 {
                     rows.Add(new Dictionary<string, string>());
@@ -155,7 +154,7 @@ namespace Advanced_Flight_Simulator
             {
                 return String.Empty;
             }
-            return rows[0].ElementAt(index).Key;
+            return rows.First().ElementAt(index).Key;
         }
     }
 }

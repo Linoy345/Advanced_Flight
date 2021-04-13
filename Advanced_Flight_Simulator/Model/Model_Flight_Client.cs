@@ -69,7 +69,10 @@ namespace Advanced_Flight_Simulator
         }
         public void disconnect()
         {
-            stream.Close();
+            if (stream != null)
+            {
+                stream.Close();
+            }
             client.Close();
         }
     }
