@@ -98,9 +98,9 @@ namespace Advanced_Flight_Simulator
 
         public string get_value(int row, string attribute_name)
         {
-            if (attribute_name != null)
+            if (!String.IsNullOrEmpty(attribute_name))
             {
-                if (row < row_count() && rows[row].ContainsKey(attribute_name))
+                if (row < row_count() && rows.First().ContainsKey(attribute_name))
                 {
                     return rows[row][attribute_name];
                 }

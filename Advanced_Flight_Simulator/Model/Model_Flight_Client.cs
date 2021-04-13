@@ -21,7 +21,7 @@ namespace Advanced_Flight_Simulator
         }
         private bool is_connected()
         {
-            if(client == null) { return false; }
+            if(client == null || client.Client == null) { return false; }
             return client.Connected;
         }
         public void connect(string ip, int port)
@@ -69,6 +69,7 @@ namespace Advanced_Flight_Simulator
         }
         public void disconnect()
         {
+            stream.Close();
             client.Close();
         }
     }

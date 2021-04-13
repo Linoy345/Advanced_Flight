@@ -440,7 +440,7 @@ namespace Advanced_Flight_Simulator
             string valueString;
             double currentValue;
             List<DataPoint> currentList = new List<DataPoint>();
-            if (!String.IsNullOrEmpty(header))
+            if (!String.IsNullOrEmpty(header)) 
             {
                 for (int frame = 0; frame < frameId; frame++)
                 {
@@ -510,7 +510,7 @@ namespace Advanced_Flight_Simulator
             {
                 graphAttribute = value;
                 NotifyPropertyChanged("GraphAttribute");
-                new Thread(delegate ()
+                new Task(delegate ()
                 {
                     Correlated_Attribute = getMostCorraltedFeature();
                     updateLineGraph();
