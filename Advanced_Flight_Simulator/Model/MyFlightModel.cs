@@ -10,6 +10,9 @@ using System.Threading.Tasks;
 
 namespace Advanced_Flight_Simulator
 {
+    /*
+    * This class represents model.
+    */
     public class MyFlightModel : IFlightModel
     {
         private Flight_Info info;
@@ -49,7 +52,9 @@ namespace Advanced_Flight_Simulator
         private double speed;
 
         public event PropertyChangedEventHandler PropertyChanged;
-
+        /*
+        * Constructor - initialize model with given client.
+        */
         public MyFlightModel(IClient client)
         {
             FrameId = 0;
@@ -67,7 +72,9 @@ namespace Advanced_Flight_Simulator
             x = 0;
             y = 0;
         }
-
+        /*
+        * Getter and Setter for property ShouldStop.
+        */
         public bool ShouldStop
         {
             get { return shouldStop; }
@@ -77,6 +84,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("ShouldStop");
             }
         }
+        /*
+        * Getter and Setter for property FinishedStart.
+        */
         public bool FinishedStart
         {
             get { return finishedStart; }
@@ -86,6 +96,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("FinishedStart");
             }
         }
+        /*
+        * Getter and Setter for property Direction.
+        */
         public double Direction
         {
             get
@@ -98,7 +111,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Direction");
             }
         }
-
+        /*
+        * Getter and Setter for property Yaw.
+        */
         public double Yaw
         {
             get { return yaw; }
@@ -108,6 +123,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Yaw");
             }
         }
+        /*
+        * Getter and Setter for property Roll.
+        */
         public double Roll
         {
             get { return roll; }
@@ -119,6 +137,9 @@ namespace Advanced_Flight_Simulator
             }
 
         }
+        /*
+        * Getter and Setter for property Pitch.
+        */
         public double Pitch
         {
             get { return pitch; }
@@ -128,6 +149,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Pitch");
             }
         }
+        /*
+        * Getter and Setter for property Altitude.
+        */
         public double Altitude
         {
             get { return altitude; }
@@ -137,6 +161,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Altitude");
             }
         }
+        /*
+        * Getter and Setter for property Speed.
+        */
         public double Speed
         {
             get { return speed; }
@@ -146,6 +173,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Speed");
             }
         }
+        /*
+        * Updating the Indices properties.
+        */
         public void RefreshIndices()
         {
             Speed = Convert.ToDouble(info.get_value(FrameId, "airspeed-kt"));
@@ -155,6 +185,9 @@ namespace Advanced_Flight_Simulator
             Yaw = Convert.ToDouble(info.get_value(FrameId, "side-slip-deg"));
             Direction = Convert.ToDouble(info.get_value(FrameId, "heading-deg"));
         }
+        /*
+        * Getter and Setter for property FrameId.
+        */
         public int FrameId
         {
             get
@@ -167,7 +200,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("FrameId");
             }
         }
-
+        /*
+        * Getter and Setter for property Aileron.
+        */
         public double Aileron
         {
             get
@@ -180,6 +215,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Aileron");
             }
         }
+        /*
+        * Getter and Setter for property Elevator.
+        */
         public double Elevator
         {
             get
@@ -192,6 +230,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Elevator");
             }
         }
+        /*
+        * Getter and Setter for property X.
+        */
         public double X
         {
             get
@@ -204,7 +245,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("X");
             }
         }
-
+        /*
+        * Getter and Setter for property Y.
+        */
         public double Y
         {
             get
@@ -217,7 +260,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Y");
             }
         }
-
+        /*
+        * Getter and Setter for property Rudder.
+        */
         public double Rudder
         {
             get
@@ -233,6 +278,9 @@ namespace Advanced_Flight_Simulator
                 }
             }
         }
+        /*
+        * Getter and Setter for property Throttle.
+        */
         public double Throttle
         {
             get
@@ -249,7 +297,9 @@ namespace Advanced_Flight_Simulator
 
             }
         }
-
+        /*
+        * Updating the Joistick properties.
+        */
         public void updateJoistick()
         {
             Rudder = Convert.ToDouble(info.get_value(FrameId, "rudder"));
@@ -259,6 +309,9 @@ namespace Advanced_Flight_Simulator
             X = (Aileron * 90);
             Y = (Elevator * 90);
         }
+        /*
+        * Getter and Setter for property Frequency.
+        */
         public double Frequency
         {
             get { return frequency; }
@@ -268,46 +321,63 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Frequency");
             }
         }
-
+        /*
+        * Getter for property Frequency.
+        */
         public int RowCount
         {
             get { return info.row_count(); }
         }
 
-
+        /*
+        * Changing frame by changing FrameId to given id.
+        */
         public void changeFrame(int id)
         {
             FrameId = id;
         }
+        /*
+        * Notify that property changed.
+        */
         public void NotifyPropertyChanged(string propName)
         {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
 
-
+        /*
+        * stopping the frame.
+        */
         public void stopFrame()
         {
             ShouldStop = true;
         }
-
+        /*
+        * continuing the frame.
+        */
         public void continueFrame()
         {
             ShouldStop = false;
         }
-
+        /*
+        * Connect the client with given ip and port.
+        */
         public void connect(string ip, int port)
         {
             client.connect(ip, port);
         }
-
+        /*
+        * Disconnect the client.
+        */
         public void disconnect()
         {
             client.disconnect();
             stopFrame();
             FrameId = 0;
         }
-
+        /*
+        * Sending 1 frame to server by sending him row.
+        */
         public void sendFrame()
         {
             if (!ShouldStop && FrameId < RowCount)
@@ -316,11 +386,16 @@ namespace Advanced_Flight_Simulator
                 FrameId++;
             }
         }
-
+        /*
+        * Return the the size of attributes.
+        */
         public int attributeCount()
         {
             return info.attribute_count();
         }
+        /*
+        * Initialize the flight.
+        */
         public void init()
         {
             if (FilePath != string.Empty)
@@ -335,28 +410,37 @@ namespace Advanced_Flight_Simulator
             }
 
         }
+        /*
+        * Updating the line of the graph.
+        */
         private void updateLineGraph()
         {
             LinePoints = generateLinePoints();
             AttributesGraph = generateGraphAttributes();
         }
+        /*
+        * Return the latest points.
+        */
         private List<DataPoint> generateLatestsPoints()
         {
             float x, y;
             int frame = 0;
             List<DataPoint> pointsList = new List<DataPoint>();
-            if(FrameId > 300)
+            if (FrameId > 300)
             {
                 frame = frameId - 300;
             }
-                for(; frame < FrameId; frame++)
-                {
-                    x = float.Parse(info.get_value(frame, GraphAttribute));
-                    y = float.Parse(info.get_value(frame, Correlated_Attribute));
-                    pointsList.Add(new DataPoint(x, y));
-                }
+            for (; frame < FrameId; frame++)
+            {
+                x = float.Parse(info.get_value(frame, GraphAttribute));
+                y = float.Parse(info.get_value(frame, Correlated_Attribute));
+                pointsList.Add(new DataPoint(x, y));
+            }
             return pointsList;
         }
+        /*
+        * Return the graph attributes.
+        */
         private List<DataPoint> generateGraphAttributes()
         {
             double x, y;
@@ -369,6 +453,9 @@ namespace Advanced_Flight_Simulator
             }
             return pointsList;
         }
+        /*
+        * Return the line points.
+        */
         private List<DataPoint> generateLinePoints()
         {
             float maxX = 0, minX = float.MaxValue;
@@ -389,11 +476,17 @@ namespace Advanced_Flight_Simulator
             pointsList.Add(new DataPoint(maxX, line.f(maxX)));
             return pointsList;
         }
+        /*
+        * Updating the graph.
+        */
         private void updateGraphs()
         {
             MainGraph = getGraphPoint(GraphAttribute);
             CorrelatedGraph = getGraphPoint(correlated_Attribute);
         }
+        /*
+        * Strating the app.
+        */
         public void start()
         {
             if (FinishedStart)
@@ -437,12 +530,15 @@ namespace Advanced_Flight_Simulator
         }
 
         //Yair addition:
+        /*
+        * Return graph points.
+        */
         private List<DataPoint> getGraphPoint(string header)
         {
             string valueString;
             double currentValue;
             List<DataPoint> currentList = new List<DataPoint>();
-            if (!String.IsNullOrEmpty(header)) 
+            if (!String.IsNullOrEmpty(header))
             {
                 for (int frame = 0; frame < RowCount; frame++)
                 {
@@ -453,7 +549,9 @@ namespace Advanced_Flight_Simulator
             }
             return currentList;
         }
-
+        /*
+        * Getter and Setter for property MainGraph.
+        */
         public List<DataPoint> MainGraph
         {
             get
@@ -466,6 +564,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("MainGraph");
             }
         }
+        /*
+        * Getter and Setter for property CorrelatedGraph.
+        */
         public List<DataPoint> CorrelatedGraph
         {
             get
@@ -478,6 +579,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("CorrelatedGraph");
             }
         }
+        /*
+        * Getter and Setter for property AttributesGraph.
+        */
         public List<DataPoint> AttributesGraph
         {
             get
@@ -490,6 +594,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("AttributesGraph");
             }
         }
+        /*
+        * Getter and Setter for property AttributesNames.
+        */
         public List<string> AttributesNames
         {
             get
@@ -502,6 +609,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("AttributesNames");
             }
         }
+        /*
+        * Getter and Setter for property GraphAttribute.
+        */
         public string GraphAttribute
         {
             get
@@ -520,7 +630,9 @@ namespace Advanced_Flight_Simulator
                 }).Start();
             }
         }
-
+        /*
+        * Getter and Setter for property Correlated_Attribute.
+        */
         public string Correlated_Attribute
         {
             get
@@ -534,11 +646,16 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("Correlated_Attribute");
             }
         }
-
+        /*
+        * Return the value of the attribute in a row by given attribute name and a row.
+        */
         public string getValue(int row, string attribueName)
         {
             return info.get_value(row, attribueName);
         }
+        /*
+        * Opening a file and return the file path as string.
+        */
         public string openFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
@@ -553,6 +670,9 @@ namespace Advanced_Flight_Simulator
             }
             return FilePath;
         }
+        /*
+        * Getter and Setter for property FilePath.
+        */
         public string FilePath
         {
             get
@@ -565,7 +685,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("FilePath");
             }
         }
-
+        /*
+        * Getter and Setter for property LinePoints.
+        */
         public List<DataPoint> LinePoints
         {
             get
@@ -578,6 +700,9 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("LinePoints");
             }
         }
+        /*
+        * Getter and Setter for property LatestPoints.
+        */
         public List<DataPoint> LatestPoints
         {
             get
@@ -591,6 +716,9 @@ namespace Advanced_Flight_Simulator
             }
         }
         //CALL FIRST TO getMostCorraltedFeature AND THEN TO getLinearReg
+        /*
+        * Return the most correlated feature to GraphAttribute.
+        */
         public string getMostCorraltedFeature() //graph for yair
         {
             int index = info.getIndex(GraphAttribute);
@@ -599,7 +727,9 @@ namespace Advanced_Flight_Simulator
             return info.getAttributeFromIndex(Int32.Parse(correlatedIndex));
             //yair will use : info.getAttributeFromIndex(index);
         }
-
+        /*
+        * Return the line reg for Graph Attribute.
+        */
         public Line.Line getLinearReg() //graph for yair
         {
             return this.correlatedDll.getLine(info.getIndex(GraphAttribute));

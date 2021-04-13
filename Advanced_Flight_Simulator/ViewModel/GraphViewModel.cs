@@ -6,18 +6,28 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Advanced_Flight_Simulator 
+namespace Advanced_Flight_Simulator
 {
-   public class GraphViewModel: FlightViewModel
+    /*
+    * This class represents GraphViewModel as viewmodel.
+    */
+    public class GraphViewModel : FlightViewModel
     {
-
-        public GraphViewModel(IFlightModel model) : base(model) {}
+        /*
+        * Constructor - initialize GraphViewModel by given model.
+        */
+        public GraphViewModel(IFlightModel model) : base(model) { }
+        /*
+        * Getter for property VM_AttributesNames.
+        */
         public List<string> VM_AttributesNames
         {
             get { return model.AttributesNames; }
 
         }
-        
+        /*
+        * Getter and Setter for property VM_GraphAttribute.
+        */
         public string VM_GraphAttribute
         {
             get { return model.GraphAttribute; }
@@ -26,6 +36,9 @@ namespace Advanced_Flight_Simulator
                 model.GraphAttribute = value;
             }
         }
+        /*
+        * Getter and Setter for property VM_CorrelatedAttribute.
+        */
         public string VM_CorrelatedAttribute
         {
             get { return model.Correlated_Attribute; }
@@ -34,8 +47,10 @@ namespace Advanced_Flight_Simulator
                 model.Correlated_Attribute = value;
             }
         }
-        
 
+        /*
+        * Getter for property VM_MainGraph.
+        */
         public List<DataPoint> VM_MainGraph
         {
             get
@@ -43,6 +58,9 @@ namespace Advanced_Flight_Simulator
                 return model.MainGraph;
             }
         }
+        /*
+        * Getter for property VM_LinePoints.
+        */
         public List<DataPoint> VM_LinePoints
         {
             get
@@ -50,7 +68,9 @@ namespace Advanced_Flight_Simulator
                 return model.LinePoints;
             }
         }
-
+        /*
+        * Getter for property VM_CorrelatedGraph.
+        */
         public List<DataPoint> VM_CorrelatedGraph
         {
             get
@@ -58,7 +78,9 @@ namespace Advanced_Flight_Simulator
                 return model.CorrelatedGraph;
             }
         }
-
+        /*
+        * Getter for property VM_AttributesGraph.
+        */
         public List<DataPoint> VM_AttributesGraph
         {
             get
@@ -66,6 +88,9 @@ namespace Advanced_Flight_Simulator
                 return model.AttributesGraph;
             }
         }
+        /*
+        * Getter for property VM_LatestPoints.
+        */
         public List<DataPoint> VM_LatestPoints
         {
             get
@@ -73,10 +98,16 @@ namespace Advanced_Flight_Simulator
                 return model.LatestPoints;
             }
         }
+        /*
+        * Return the most correlated feature using model.
+        */
         public string VM_getMostCorraltedFeature() //go over the dictionaray, every pair is the "me" and ny corrlated featuer
         {
             return model.getMostCorraltedFeature();
         }
+        /*
+        * Return the linear reg using model.
+        */
         public Line.Line VM_getLinearReg() //graph for yair
         {
             return this.model.getLinearReg();

@@ -9,19 +9,22 @@ using Line;
 
 namespace Advanced_Flight_Simulator
 {
+    /*
+    * Interface that represents model.
+    */
     public interface IFlightModel : INotifyPropertyChanged
     {
         // connection to the flight
         void connect(string ip, int port);
         void disconnect();
         void start();
-        
+
         string openFile();
         // sensors properties
 
         //Linoy
         bool ShouldStop { set; get; }
-        bool FinishedStart {set; get;}
+        bool FinishedStart { set; get; }
         int FrameId { set; get; }
         double Rudder { set; get; }
         double Throttle { set; get; }
@@ -53,11 +56,11 @@ namespace Advanced_Flight_Simulator
         List<DataPoint> CorrelatedGraph { get; set; }
         List<DataPoint> LinePoints { get; set; }
         List<DataPoint> AttributesGraph { get; set; }
-        List<DataPoint> LatestPoints { get;}
+        List<DataPoint> LatestPoints { get; }
 
         //List<DataPoint> LatestPoints { get; set; }
 
-        
+
 
 
 
@@ -68,7 +71,7 @@ namespace Advanced_Flight_Simulator
         void continueFrame();
         void changeFrame(int frameNum);
         string getMostCorraltedFeature();
-        Line.Line getLinearReg(); 
+        Line.Line getLinearReg();
 
     }
 }
