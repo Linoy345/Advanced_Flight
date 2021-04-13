@@ -16,9 +16,9 @@ using OxyPlot;
 
 namespace Advanced_Flight_Simulator
 {
-    /// <summary>
-    /// Interaction logic for GraphView.xaml
-    /// </summary>
+    /***
+     * the class GraphView is the view of all the graphs in our project.
+     ***/
     public partial class GraphView : UserControl
     {
         public GraphView()
