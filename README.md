@@ -1,5 +1,5 @@
-**Welcome to our FlightGear Application!
-**
+Welcome to our FlightGear Application!
+
 
     We built a WPF application - a GUI interface which will show us information and playback tools according to the plane in FlightGear   
     simulator.
