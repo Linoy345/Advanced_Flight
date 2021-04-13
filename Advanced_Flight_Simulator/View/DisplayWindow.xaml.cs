@@ -22,6 +22,7 @@ namespace Advanced_Flight_Simulator
     {
         private FlightViewModel vm;
         private GraphViewModel graph_vm;
+        private IFlightModel model;
         public DisplayWindow(string ip, string port)
         {
             Model_Flight_Client client = new Model_Flight_Client(ip, Int32.Parse(port));
@@ -34,7 +35,7 @@ namespace Advanced_Flight_Simulator
         }
         private void initDisplay(Model_Flight_Client client)
         {
-            IFlightModel model = new MyFlightModel(client);
+            model = new MyFlightModel(client);
             InitializeComponent(); //call it from mainWindow.
                                    //int port = 5400;
                                    //string ip = "127.0.0.1";
@@ -60,6 +61,7 @@ namespace Advanced_Flight_Simulator
             {
                 vm.VM_init();
                 vm.VM_Start();
+                openDllDlgo.IsEnabled = true;
             }
             catch (Exception)
             {
@@ -71,6 +73,11 @@ namespace Advanced_Flight_Simulator
         private void Button_Click_OpenFile(object sender, RoutedEventArgs e)
         {
             vm.VM_openFile();
+        }
+
+        private void Button_Click_OpenDllAlgo(object sender, RoutedEventArgs e)
+        {
+            vm.VM_openDllAlgo();
         }
     }
 }

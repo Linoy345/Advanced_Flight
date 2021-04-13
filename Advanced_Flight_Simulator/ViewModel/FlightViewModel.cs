@@ -148,5 +148,9 @@ namespace Advanced_Flight_Simulator
         {
             return model.openFile();
         }
+        public string VM_openDllAlgo()
+        {
+            return model.openDllAlgo();
+        }
     }
 }

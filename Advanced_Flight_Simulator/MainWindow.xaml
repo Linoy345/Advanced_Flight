@@ -13,8 +13,8 @@
 
     <Grid>
         <Canvas HorizontalAlignment="Left" Name="canvas" Height="100" VerticalAlignment="Top"  Width="100">
-            <TextBox x:Name="Ip" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Canvas.Left="332" Canvas.Top="69" />
-            <TextBox x:Name="Port" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Canvas.Left="330" Canvas.Top="104"/>
+            <TextBox x:Name="Ip" Text="127.0.0.1" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Canvas.Left="332" Canvas.Top="69" />
+            <TextBox x:Name="Port" Text="5400" HorizontalAlignment="Center" Height="23" TextWrapping="Wrap"  VerticalAlignment="Top" Width="120" Canvas.Left="330" Canvas.Top="104"/>
             <Button Content="Connect" HorizontalAlignment="Left" VerticalAlignment="Top" Width="86" Click="Connect_botton" Canvas.Left="279" Canvas.Top="141" Foreground="#FF4A3131" RenderTransformOrigin="0.618,0.387"/>
         </Canvas>
         <Button Content="Start Offline" HorizontalAlignment="Left" Margin="399,140,0,0" VerticalAlignment="Top" Width="87" Click="Button_Click" Height="22"/>

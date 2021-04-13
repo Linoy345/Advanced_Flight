@@ -15,12 +15,14 @@ namespace Advanced_Flight_Simulator
         private Flight_Info info;
         private IClient client;
         private CorrelatedDll correlatedDll;
+        private LoadDll algodDll;
 
         volatile private bool showCorrelationGraphs;
         volatile private bool shouldStop;
         volatile private int frameId;
         volatile private bool finishedStart; // Prevent from oppening multiple thread in start.
         volatile private string filePath;
+        volatile private string filePathDllAlgo;
 
         volatile private List<string> attributeNames;
         volatile private List<DataPoint> linePoints;
@@ -65,6 +67,14 @@ namespace Advanced_Flight_Simulator
             showCorrelationGraphs = false;
             x = 0;
             y = 0;
+        }
+
+        /*
+         * Getter for property Flight_Info.
+         */
+        public Flight_Info FlightInfo
+        {
+            get { return info; }
         }
 
         public bool ShouldStop
@@ -344,16 +354,16 @@ namespace Advanced_Flight_Simulator
             float x, y;
             int frame = 0;
             List<DataPoint> pointsList = new List<DataPoint>();
-            if(FrameId > 300)
+            if (FrameId > 300)
             {
                 frame = frameId - 300;
             }
-                for(; frame < FrameId; frame++)
-                {
-                    x = float.Parse(info.get_value(frame, GraphAttribute));
-                    y = float.Parse(info.get_value(frame, Correlated_Attribute));
-                    pointsList.Add(new DataPoint(x, y));
-                }
+            for (; frame < FrameId; frame++)
+            {
+                x = float.Parse(info.get_value(frame, GraphAttribute));
+                y = float.Parse(info.get_value(frame, Correlated_Attribute));
+                pointsList.Add(new DataPoint(x, y));
+            }
             return pointsList;
         }
         private List<DataPoint> generateGraphAttributes()
@@ -536,9 +546,11 @@ namespace Advanced_Flight_Simulator
         {
             return info.get_value(row, attribueName);
         }
+
         public string openFile()
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV file (*.csv) | *.csv";
             if (openFileDialog.ShowDialog() == true)
             {   //(csv_path, xml_path);
                 FilePath = openFileDialog.FileName;
@@ -560,6 +572,35 @@ namespace Advanced_Flight_Simulator
             {
                 filePath = value;
                 NotifyPropertyChanged("FilePath");
+            }
+        }
+
+        public string openDllAlgo()
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "Dll file (*.dll) | *.dll";
+
+            if (openFileDialog.ShowDialog() == true)
+            {
+                FilePathDllAlgo = openFileDialog.FileName;
+                algodDll = new LoadDll(FilePathDllAlgo, FilePath, FlightInfo);
+            }
+            else
+            {
+                FilePathDllAlgo = String.Empty;
+            }
+            return FilePathDllAlgo;
+        }
+        public string FilePathDllAlgo
+        {
+            get
+            {
+                return filePathDllAlgo;
+            }
+            set
+            {
+                filePathDllAlgo = value;
+                NotifyPropertyChanged("FilePathDllAlgo");
             }
         }
 

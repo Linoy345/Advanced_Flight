@@ -80,9 +80,6 @@
     <Reference Include="anomalyDetectorDll3">
       <HintPath>plugins\anomalyDetectorDll3.dll</HintPath>
     </Reference>
-    <Reference Include="attemptDll">
-      <HintPath>plugins\attemptDll.dll</HintPath>
-    </Reference>
     <Reference Include="MaterialDesignColors, Version=2.0.0.2422, Culture=neutral, PublicKeyToken=df2a72020bd7962a, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignColors.2.0.0\lib\net452\MaterialDesignColors.dll</HintPath>
     </Reference>
@@ -97,8 +94,10 @@
     </Reference>
     <Reference Include="ReachFramework" />
     <Reference Include="System" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Printing" />
+    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -118,8 +117,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="CorrelatedDll.cs" />
+    <Compile Include="LoadDll.cs" />
     <Compile Include="Model\Attribute.cs" />
     <Compile Include="Model\Line.cs" />
+    <Compile Include="NativeWrapper.cs" />
     <Compile Include="ViewModel\GraphViewModel.cs" />
     <Compile Include="View\controls.xaml.cs">
       <DependentUpon>controls.xaml</DependentUpon>

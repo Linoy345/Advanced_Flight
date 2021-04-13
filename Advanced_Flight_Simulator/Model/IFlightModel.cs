@@ -17,6 +17,8 @@ namespace Advanced_Flight_Simulator
         void start();
         
         string openFile();
+
+        string openDllAlgo();
         // sensors properties
 
         //Linoy
@@ -60,6 +62,7 @@ namespace Advanced_Flight_Simulator
 
 
         string FilePath { get; set; }
+        Flight_Info FlightInfo { get; }
 
         // activate actuators
         void stopFrame();
