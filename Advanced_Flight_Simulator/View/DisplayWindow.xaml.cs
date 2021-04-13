@@ -72,5 +72,10 @@ namespace Advanced_Flight_Simulator
         {
             vm.VM_openFile();
         }
+
+        private void Graph_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
