@@ -575,7 +575,7 @@ namespace Advanced_Flight_Simulator
         {
             if (FinishedStart)
             {
-                new Thread(delegate ()
+                new Task(delegate ()
                 {
                     FinishedStart = false;
                     while (FrameId < RowCount)
@@ -586,7 +586,7 @@ namespace Advanced_Flight_Simulator
                     }
                     FinishedStart = true;
                 }).Start();
-                new Thread(delegate ()
+                new Task(delegate ()
                 {
                     while (FrameId < RowCount)
                     {
@@ -698,7 +698,7 @@ namespace Advanced_Flight_Simulator
             {
                 graphAttribute = value;
                 NotifyPropertyChanged("GraphAttribute");
-                new Thread(delegate ()
+                new Task(delegate ()
                 {
                     Correlated_Attribute = getMostCorraltedFeature();
                     updateGraphs();
