@@ -116,7 +116,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CorrelatedDll.cs" />
+    <Compile Include="Model\CorrelatedDll.cs" />
     <Compile Include="LoadDll.cs" />
     <Compile Include="Model\Attribute.cs" />
     <Compile Include="Model\Line.cs" />
@@ -247,7 +247,8 @@
     <Content Include="bin\Debug\Advanced_Flight_Simulator.pdb" />
     <Content Include="bin\x86\Debug\Advanced_Flight_Simulator.exe" />
     <Content Include="bin\x86\Debug\Advanced_Flight_Simulator.pdb" />
-    <Content Include="plugins\anomalyDetectorDll3.dll" />
+    <Content Include="Model\anomalyDetectorDll3.dll" />
+    <Content Include="plugins\regressionAlgo.dll" />
     <Resource Include="View\images\Main_Window_Background.jpg" />
     <Resource Include="bin\Debug\playback_small.xml" />
   </ItemGroup>

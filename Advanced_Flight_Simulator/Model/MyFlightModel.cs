@@ -508,14 +508,6 @@ namespace Advanced_Flight_Simulator
                     while (FrameId < info.row_count())
                     {
                         sendFrame();
-                        //for check
-                        /*string s = getMostCorraltedFeature();
-                        Console.WriteLine("pearon - {0}", s);
-
-                        Line.Line l = getLinearReg();
-                        Console.WriteLine("a - {0}", l.a);
-                        Console.WriteLine("b - {0}", l.b);
-                        */
                         // the same for the other sensors properties
                         Thread.Sleep((int)Frequency);// read the data in 4Hz
                     }
@@ -675,7 +667,7 @@ namespace Advanced_Flight_Simulator
             if (openFileDialog.ShowDialog() == true)
             {   //(csv_path, xml_path);
                 FilePath = openFileDialog.FileName;
-                correlatedDll = new CorrelatedDll(FilePath);
+                correlatedDll = new CorrelatedDll("reg_flight.csv");//load a regular flight and learn from it
             }
             else
             {
@@ -758,7 +750,6 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("LatestPoints");
             }
         }
-        //CALL FIRST TO getMostCorraltedFeature AND THEN TO getLinearReg
         /*
         * Return the most correlated feature to GraphAttribute.
         */
@@ -766,9 +757,7 @@ namespace Advanced_Flight_Simulator
         {
             int index = info.getIndex(GraphAttribute);
             string correlatedIndex = this.correlatedDll.getPearsonFeature(index);
-            //what to do with index -1?
             return info.getAttributeFromIndex(Int32.Parse(correlatedIndex));
-            //yair will use : info.getAttributeFromIndex(index);
         }
         /*
         * Return the line reg for Graph Attribute.
