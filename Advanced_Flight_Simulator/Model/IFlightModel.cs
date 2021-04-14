@@ -53,7 +53,7 @@ namespace Advanced_Flight_Simulator
         int RowCount { get; set; }
         List<string> AttributesNames { get; }
         string GraphAttribute { set; get; }
-        string Correlated_Attribute { get; set; }
+        string CorrelatedAttribute { get; set; }
         List<DataPoint> MainGraph { get; set; }
         List<DataPoint> CorrelatedGraph { get; set; }
         List<DataPoint> LinePoints { get; set; }
