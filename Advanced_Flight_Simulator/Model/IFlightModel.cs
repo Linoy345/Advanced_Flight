@@ -50,7 +50,7 @@ namespace Advanced_Flight_Simulator
 
         //Yair
         string getValue(int frame, string attributeName);
-        int RowCount { get; }
+        int RowCount { get; set; }
         List<string> AttributesNames { get; }
         string GraphAttribute { set; get; }
         string Correlated_Attribute { get; set; }
@@ -58,10 +58,13 @@ namespace Advanced_Flight_Simulator
         List<DataPoint> CorrelatedGraph { get; set; }
         List<DataPoint> LinePoints { get; set; }
         List<DataPoint> AttributesGraph { get; set; }
-        List<DataPoint> LatestPoints { get; }
-
-        //List<DataPoint> LatestPoints { get; set; }
-
+        List<DataPoint> LatestPoints { get; set; }
+        List<string> AnomaliesList { get; set; }
+        List<DataPoint> AnomaliesPoints { get; set; }
+        List<DataPoint> AnomaliesLine { get; set; }
+        List<DataPoint> AnomalyPoint { get; set; }
+        string CurrentAnomaly { get; set; }
+        bool DllPluged { get; set; }
 
 
 

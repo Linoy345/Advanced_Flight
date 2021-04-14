@@ -20,9 +20,11 @@ namespace Advanced_Flight_Simulator
         private CorrelatedDll correlatedDll;
         private LoadDll algodDll;
 
+        volatile private bool dllPluged;
         volatile private bool showCorrelationGraphs;
         volatile private bool shouldStop;
         volatile private int frameId;
+        volatile private int rowCount;
         volatile private bool finishedStart; // Prevent from oppening multiple thread in start.
         volatile private string filePath;
         volatile private string filePathDllAlgo;
@@ -33,6 +35,17 @@ namespace Advanced_Flight_Simulator
         volatile private List<DataPoint> correlated_Graph;
         volatile private List<DataPoint> attributesGraph;
         volatile private List<DataPoint> latestPoints;
+        volatile private List<DataPoint> anomaliesPoints;
+        volatile private List<string> anomaliesList;
+        volatile private List<DataPoint> anomaliesLine;
+        private List<DataPoint> anomalyPoint;
+
+
+
+
+        volatile private string currentAnomaly;
+
+
 
         volatile private string graphAttribute;
         volatile private string correlated_Attribute;
@@ -59,7 +72,9 @@ namespace Advanced_Flight_Simulator
         */
         public MyFlightModel(IClient client)
         {
+            RowCount = 0;
             FrameId = 0;
+            DllPluged = false;
             Frequency = 1;
             info = new Flight_Info();
             this.client = client;
@@ -68,6 +83,10 @@ namespace Advanced_Flight_Simulator
             LinePoints = new List<DataPoint>();
             LatestPoints = new List<DataPoint>();
             CorrelatedGraph = new List<DataPoint>();
+            AnomaliesPoints = new List<DataPoint>();
+            AnomaliesLine = new List<DataPoint>();
+
+            AnomaliesList = new List<string>();
             FinishedStart = true;
             ShouldStop = false;
             showCorrelationGraphs = false;
@@ -207,7 +226,10 @@ namespace Advanced_Flight_Simulator
             }
             set
             {
-                frameId = value;
+                if (value >= 0 && value <= RowCount)
+                {
+                    frameId = value;
+                }
                 NotifyPropertyChanged("FrameId");
             }
         }
@@ -337,7 +359,12 @@ namespace Advanced_Flight_Simulator
         */
         public int RowCount
         {
-            get { return info.row_count(); }
+            get { return rowCount; }
+            set
+            {
+                rowCount = value;
+                NotifyPropertyChanged("RowCount");
+            }
         }
 
         /*
@@ -362,6 +389,18 @@ namespace Advanced_Flight_Simulator
         public void stopFrame()
         {
             ShouldStop = true;
+        }
+        public bool DllPluged
+        {
+            get
+            {
+                return dllPluged;
+            }
+            set
+            {
+                dllPluged = value;
+                NotifyPropertyChanged("DllPluged");
+            }
         }
         /*
         * continuing the frame.
@@ -413,10 +452,11 @@ namespace Advanced_Flight_Simulator
             {
                 info.init_Flight_Info(FilePath);
                 AttributesNames = info.get_attribute_names();
+                RowCount = info.row_count();
                 //correlatedDll = new CorrelatedDll(FilePath);
-                NotifyPropertyChanged(string.Empty);
-                NotifyPropertyChanged("AttributesNames");
-                NotifyPropertyChanged("RowCount");
+                //NotifyPropertyChanged(string.Empty);
+                //NotifyPropertyChanged("AttributesNames");
+                //NotifyPropertyChanged("RowCount");
 
             }
 
@@ -437,9 +477,9 @@ namespace Advanced_Flight_Simulator
             float x, y;
             int frame = 0;
             List<DataPoint> pointsList = new List<DataPoint>();
-            if (FrameId > 300)
+            if (FrameId > 150)
             {
-                frame = frameId - 300;
+                frame = frameId - 150;
             }
             for (; frame < FrameId; frame++)
             {
@@ -449,6 +489,7 @@ namespace Advanced_Flight_Simulator
             }
             return pointsList;
         }
+
         /*
         * Return the graph attributes.
         */
@@ -464,29 +505,61 @@ namespace Advanced_Flight_Simulator
             }
             return pointsList;
         }
+
+        /*
+         * Return Anomalies Reg Line
+         */
+        private List<DataPoint> generateAnomaliesLine()
+        {
+            float maxX = float.MinValue, minX = float.MaxValue;
+            List<DataPoint> pointsList = new List<DataPoint>();
+            Line.Line line = getLinearReg();
+            foreach (DataPoint point in anomaliesPoints)
+            {
+                if (point.X < minX)
+                {
+                    minX = (float)point.X;
+                }
+                if (point.X > maxX)
+                {
+                    maxX = (float)point.X;
+                }
+            }
+            if (minX != float.MaxValue && maxX != float.MinValue)
+            {
+                pointsList.Add(new DataPoint(minX, line.f(minX)));
+                pointsList.Add(new DataPoint(maxX, line.f(maxX)));
+            }
+            return pointsList;
+        }
+
         /*
         * Return the line points.
         */
         private List<DataPoint> generateLinePoints()
         {
             float maxX = 0, minX = float.MaxValue;
+            float currentValue;
             List<DataPoint> pointsList = new List<DataPoint>();
             Line.Line line = getLinearReg();
             foreach (var value in info.get_attribute(GraphAttribute))
             {
-                if (float.Parse(value) < minX)
+                currentValue = float.Parse(value);
+                if (currentValue < minX)
                 {
-                    minX = float.Parse(value);
+                    minX = currentValue;
                 }
-                if (float.Parse(value) > maxX)
+                if (currentValue > maxX)
                 {
-                    maxX = float.Parse(value);
+                    maxX = currentValue;
                 }
             }
             pointsList.Add(new DataPoint(minX, line.f(minX)));
             pointsList.Add(new DataPoint(maxX, line.f(maxX)));
             return pointsList;
         }
+
+
         /*
         * Updating the graph.
         */
@@ -505,7 +578,7 @@ namespace Advanced_Flight_Simulator
                 new Thread(delegate ()
                 {
                     FinishedStart = false;
-                    while (FrameId < info.row_count())
+                    while (FrameId < RowCount)
                     {
                         sendFrame();
                         // the same for the other sensors properties
@@ -515,7 +588,7 @@ namespace Advanced_Flight_Simulator
                 }).Start();
                 new Thread(delegate ()
                 {
-                    while (FrameId < info.row_count())
+                    while (FrameId < RowCount)
                     {
                         NotifyPropertyChanged("MainGraph");
                         NotifyPropertyChanged("CorrelatedGraph");
@@ -625,12 +698,119 @@ namespace Advanced_Flight_Simulator
             {
                 graphAttribute = value;
                 NotifyPropertyChanged("GraphAttribute");
-                new Task(delegate ()
+                new Thread(delegate ()
                 {
                     Correlated_Attribute = getMostCorraltedFeature();
                     updateGraphs();
                     updateLineGraph();
+                    if (DllPluged)
+                    {
+                        AnomalyPoint = new List<DataPoint>();
+                        updateAnomalies();
+                    }
                 }).Start();
+            }
+        }
+        /*
+        * Getter and Setter for property CurrentAnomaly.
+        */
+        public string CurrentAnomaly
+        {
+            get
+            {
+                return currentAnomaly;
+            }
+            set
+            {
+                currentAnomaly = value;
+                if (!string.IsNullOrEmpty(currentAnomaly))
+                {
+                    double x, y;
+                    FrameId = int.Parse(value);
+                    x = Double.Parse(info.get_value(int.Parse(CurrentAnomaly), GraphAttribute));
+                    y = Double.Parse(info.get_value(int.Parse(CurrentAnomaly), Correlated_Attribute));
+                    List<DataPoint> newPoint = new List<DataPoint>();
+                    newPoint.Add(new DataPoint(x, y));
+                    AnomalyPoint = newPoint;
+                }
+                NotifyPropertyChanged("CurrentAnomaly");
+            }
+        }
+        /*
+        * Getter and Setter for property CurrentAnomaly.
+        */
+        public List<string> AnomaliesList
+        {
+            get
+            {
+                return anomaliesList;
+            }
+            set
+            {
+                anomaliesList = value;
+                NotifyPropertyChanged("AnomaliesList");
+            }
+        }
+
+        public List<DataPoint> AnomaliesPoints
+        {
+            get
+            {
+                return anomaliesPoints;
+            }
+            set
+            {
+                anomaliesPoints = value;
+                NotifyPropertyChanged("AnomaliesPoints");
+            }
+        }
+        public List<DataPoint> AnomalyPoint
+        {
+            get
+            {
+                return anomalyPoint;
+            }
+            set
+            {
+                anomalyPoint = value;
+                NotifyPropertyChanged("AnomalyPoint");
+            }
+        }
+
+        public List<DataPoint> AnomaliesLine
+        {
+            get
+            {
+                return anomaliesLine;
+            }
+            set
+            {
+                anomaliesLine = value;
+                NotifyPropertyChanged("AnomaliesLine");
+            }
+        }
+        private List<DataPoint> getAnomaliesPoints()
+        {
+            double x, y;
+            int row;
+            List<DataPoint> listAnomalies = new List<DataPoint>();
+            foreach (var anomaly in AnomaliesList)
+            {
+                row = int.Parse(anomaly);
+                x = Double.Parse(getValue(row, GraphAttribute));
+                y = Double.Parse(getValue(row, Correlated_Attribute));
+                listAnomalies.Add(new DataPoint(x, y));
+            }
+            return listAnomalies;
+        }
+        private void updateAnomalies()
+        {
+            if (!String.IsNullOrEmpty(Correlated_Attribute))
+            {
+                AnomaliesList = getAnomalyReportByAttribute(GraphAttribute);
+                AnomaliesPoints = getAnomaliesPoints();
+                AnomaliesLine = generateAnomaliesLine();
+                
             }
         }
         /*
@@ -703,6 +883,7 @@ namespace Advanced_Flight_Simulator
             {
                 FilePathDllAlgo = openFileDialog.FileName;
                 algodDll = new LoadDll(FilePathDllAlgo, FilePath, FlightInfo);
+                DllPluged = true;
             }
             else
             {
@@ -765,6 +946,14 @@ namespace Advanced_Flight_Simulator
         public Line.Line getLinearReg() //graph for yair
         {
             return this.correlatedDll.getLine(info.getIndex(GraphAttribute));
+        }
+
+        /*
+        * Return the List<string> with number of line
+        */
+        public List<string> getAnomalyReportByAttribute(string attribute)
+        {
+            return this.algodDll.getAnomalyReportByAttribute(attribute);
         }
     }
 }

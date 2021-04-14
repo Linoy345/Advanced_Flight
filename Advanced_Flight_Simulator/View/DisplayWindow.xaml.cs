@@ -73,7 +73,7 @@ namespace Advanced_Flight_Simulator
         private void Button_Click_Start(object sender, RoutedEventArgs e)
         {
             vm.VM_Start();
-            openDllDlgo.IsEnabled = true;
+
         }
         /***
          * the function Button_Click_OpenFile represent the pressing on the open button.
@@ -85,6 +85,7 @@ namespace Advanced_Flight_Simulator
             {
                 vm.VM_openFile();
                 vm.VM_init();
+                openDllDlgo.IsEnabled = true;
             }
             catch (Exception)
             {

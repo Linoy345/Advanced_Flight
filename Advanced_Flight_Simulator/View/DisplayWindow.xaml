@@ -7,7 +7,7 @@
 
         mc:Ignorable="d"
 
-        Title="ContinueWindow" Height="700" Width="1000">
+        Title="ContinueWindow" Height="736" Width="1112.5">
     <Window.Background>
         <ImageBrush ImageSource="images\sky2.jpg"/>
     </Window.Background>
@@ -32,7 +32,7 @@
         <local:Joistic x:Name="joystick" Grid.Row="3" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Right" VerticalAlignment="Top" Margin="0,77,6.6,0" Grid.RowSpan="3" Height="253" Width="302"/>
         <local:Indices x:Name="indices" Grid.Row="0" Grid.ColumnSpan="4" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Top" Height="445" Margin="2,5,0,0" Width="532"/>
         <local:Controls x:Name="controls" Grid.Row="4" Grid.ColumnSpan="5" Grid.RowSpan="2" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="54,0,47,-11.8" Height="139" Width="726" />
-        <local:GraphView x:Name="graph" Background="Transparent" Grid.RowSpan="5" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="499" Margin="115.4,-16,-35.4,77" Width="748" Grid.ColumnSpan="5" Grid.Column="1" Loaded="Graph_Loaded" />
+        <local:GraphView x:Name="graph" Background="Transparent" Grid.RowSpan="4" HorizontalAlignment="Left" VerticalAlignment="Bottom" Height="414" Margin="145,0,0,40" Width="565" Grid.ColumnSpan="4" Grid.Column="2" Loaded="Graph_Loaded" />
         <Button Content="Start" HorizontalAlignment="Left" Grid.Row="4" VerticalAlignment="Top" Width="120" Height="50" Click="Button_Click_Start" FontSize="18" FontWeight="Bold" Grid.RowSpan="2" Margin="10,100,0,0"/>
         <Button Content="Disconnect" HorizontalAlignment="Left" Grid.Row="5" VerticalAlignment="Top" Width="120" Height="50" Click="Button_Click_Disconnect"  FontSize="18" FontWeight="Bold" Margin="10,50,0,0"/>
         <Button Content="Open file" HorizontalAlignment="Left"  VerticalAlignment="Top" Width="120" Height="50" Click="Button_Click_OpenFile" Grid.Row="3" FontWeight="Bold" FontSize="18" Margin="10,150,0,0" Grid.RowSpan="2"/>
