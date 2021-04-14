@@ -14,9 +14,10 @@ using System.Windows.Shapes;
 
 namespace Advanced_Flight_Simulator
 {
-    /// <summary>
-    /// Interaction logic for Indices.xaml
-    /// </summary>
+    /***
+    * the class Indices is a userControl that responsible on the view of the parameters in the flight: 
+    * roll, pitch, yaw, direaction an fligth speed.
+    ***/
     public partial class Indices : UserControl
     {
         public Indices()

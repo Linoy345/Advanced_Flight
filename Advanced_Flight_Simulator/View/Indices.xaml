@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Advanced_Flight_Simulator"
         mc:Ignorable="d"
-        Height="450" Width="800">
+        Height="450" Width="600">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -61,7 +61,7 @@
         <ProgressBar Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Height="99" Minimum="0" Maximum="200" Value="{Binding  VM_Speed, Mode=OneWay}" VerticalAlignment="Center" Width="100">
         </ProgressBar>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="200"/>
-        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" HorizontalAlignment="Left" Height="225" Margin="0,225,0,0" VerticalAlignment="Top" Width="200" Grid.RowSpan="2"/>
+        <Border BorderBrush="Black" BorderThickness="1" Grid.Column="3" HorizontalAlignment="Left" Height="224" Margin="0,0.2,0,0" VerticalAlignment="Top" Width="200" Grid.Row="1"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.ColumnSpan="3" HorizontalAlignment="Left" Height="225" VerticalAlignment="Top" Width="750"/>
         <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="225" Margin="0,225,0,0" VerticalAlignment="Top" Width="250" Grid.RowSpan="2"/>
         <Border BorderBrush="Black" BorderThickness="1" Grid.Column="1" HorizontalAlignment="Left" Height="225" Margin="0,225,0,0" VerticalAlignment="Top" Width="250" Grid.RowSpan="2"/>

@@ -15,15 +15,15 @@ using System.Windows.Shapes;
 
 namespace Advanced_Flight_Simulator
 {
-    /// <summary>
-    /// Interaction logic for Joistic.xaml
-    /// </summary>
+    /***
+    * the class Joistic is a userControl that responsible on the view of the Joistick in the flight.
+    * it will show the state of the joistick right now.
+    ***/
     public partial class Joistic : UserControl
     {
         public Joistic()
         {
             InitializeComponent();
         }
-
      }
 }

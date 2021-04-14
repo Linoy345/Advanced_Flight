@@ -6,32 +6,38 @@
              xmlns:local="clr-namespace:Advanced_Flight_Simulator"
              xmlns:oxy="http://oxyplot.org/wpf"
              mc:Ignorable="d" Height="715.666" Width="826">
-    <Grid Height="552" Margin="28,28,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="712">
+    <Grid Height="552" Margin="50,28,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="712">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="159*"/>
-            <ColumnDefinition Width="10*"/>
+            <ColumnDefinition Width="74*"/>
+            <ColumnDefinition Width="254*"/>
+            <ColumnDefinition Width="88*"/>
+            <ColumnDefinition Width="291*"/>
+            <ColumnDefinition Width="0*"/>
+            <ColumnDefinition Width="5*"/>
+            <ColumnDefinition Width="0*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="88*"/>
             <RowDefinition Height="145*"/>
             <RowDefinition Height="319*"/>
         </Grid.RowDefinitions>
-        <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_GraphAttribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,10,141" Width="226" Height="381" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.RowSpan="3" />
+        <ListBox Name="options"  Background="Transparent" SelectedIndex="0" SelectedValue="{Binding VM_GraphAttribute}" ItemsSource="{Binding VM_AttributesNames}" Margin="0,0,19.2,155" Width="206" Height="379" VerticalAlignment="Bottom" HorizontalAlignment="Right" Grid.RowSpan="3" FontWeight="Bold" Grid.Column="3" />
 
 
-        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_GraphAttribute}" Margin="0,0,329,-57" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="2">
+        <oxy:Plot x:Name="plot" Background="Transparent"  Title="{Binding VM_GraphAttribute}" Margin="0,0,290.2,66.8" Height="163" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="208" Grid.RowSpan="2" Grid.ColumnSpan="3" Grid.Column="1">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_MainGraph}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
-        <oxy:Plot x:Name="CorrelatedPlot" Background="Transparent"  Title="{Binding VM_CorrelatedAttribute}" Margin="0,0,256,12.667" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.RowSpan="2">
+        <oxy:Plot x:Name="CorrelatedPlot" Background="Transparent"  Title="{Binding VM_CorrelatedAttribute}" Margin="135.6,0,1,233" Height="152" VerticalAlignment="Bottom" Grid.RowSpan="2" Grid.ColumnSpan="2" Grid.Column="1" Grid.Row="1">
             <oxy:Plot.Series>
                 <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_CorrelatedGraph}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>
         </oxy:Plot>
-        <oxy:Plot x:Name="LinePlot" Background="Transparent" TitleColor="Black" Title="LinePlot" Margin="0,0,314,144" Height="198" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="246" Grid.Row="1" Grid.RowSpan="2">
+        <oxy:Plot x:Name="LinePlot" Background="Transparent" TitleColor="Black" Title="Line Plot" Margin="0,0,0,74" Height="179" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="206" Grid.Row="2" Grid.ColumnSpan="2" Grid.Column="1">
             <oxy:Plot.Series>
-                <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="1" MarkerFill="Brown" ItemsSource="{Binding VM_AttributesGraph}" DataFieldX="X" DataFieldY="Y"/>                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="1" MarkerFill="Brown" ItemsSource="{Binding VM_AttributesGraph}" DataFieldX="X" DataFieldY="Y"/>
+                <oxy:LineSeries Background="Transparent" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
                 <oxy:LineSeries Background="Transparent" Color="Red" ItemsSource="{Binding VM_LinePoints}" DataFieldX="X" DataFieldY="Y"/>
                 <oxy:LineSeries Background="Transparent" LineStyle="None"  MarkerType="Circle" MarkerSize="3" MarkerFill="Red" ItemsSource="{Binding VM_LatestPoints}" DataFieldX="X" DataFieldY="Y"/>
             </oxy:Plot.Series>

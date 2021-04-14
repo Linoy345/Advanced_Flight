@@ -48,12 +48,11 @@ namespace Advanced_Flight_Simulator
             try
             {
                 string[] lines = File.ReadAllLines(csv_path);
-                lines = lines.Skip(1).ToArray();
+                lines = lines.ToArray();
                 int coulumn_index = 0;
                 int row_index = 0;
                 string current_value;
                 string current_name;
-
                 foreach (var line in lines)
                 {
                     rows.Add(new Dictionary<string, string>());
@@ -91,16 +90,21 @@ namespace Advanced_Flight_Simulator
             }
             return new List<string>();
         }
+        /*
+        * Return the row of given row.
+        */
         public Dictionary<string, string> get_row(int row)
         {
             return this.rows[row];
         }
-
+        /*
+        * Return the value of the given attribute in given row.
+        */
         public string get_value(int row, string attribute_name)
         {
-            if (attribute_name != null)
+            if (!String.IsNullOrEmpty(attribute_name))
             {
-                if (row < row_count() && rows[row].ContainsKey(attribute_name))
+                if (row < row_count() && rows.First().ContainsKey(attribute_name))
                 {
                     return rows[row][attribute_name];
                 }
@@ -116,15 +120,23 @@ namespace Advanced_Flight_Simulator
         {
             return string.Join(",", rows[row].Select(x => x.Value).ToArray()) + "\r\n";
         }
+        /*
+        * Return the number of the rows.
+        */
         public int row_count()
         {
-            return this.rows.Count();
+            return this.rows.Count() - 1;
         }
+        /*
+        * Return the number of attributes.
+        */
         public int attribute_count()
         {
             return this.attributes.Count();
         }
-
+        /*
+        * Return list of names of atrributes.
+        */
         public List<string> get_attribute_names()
         {
             List<string> names = new List<string>();
@@ -134,7 +146,9 @@ namespace Advanced_Flight_Simulator
             }
             return names;
         }
-
+        /*
+        * Return the index of given attribute name. 
+        */
         public int getIndex(string name)
         {
             int i = 0;
@@ -148,14 +162,16 @@ namespace Advanced_Flight_Simulator
             }
             return -1;
         }
-
+        /*
+        * Return attribute name of given index.
+        */
         public string getAttributeFromIndex(int index)
         {
-            if(index == -1)
+            if (index == -1)
             {
                 return String.Empty;
             }
-            return rows[0].ElementAt(index).Key;
+            return rows.First().ElementAt(index).Key;
         }
     }
 }
