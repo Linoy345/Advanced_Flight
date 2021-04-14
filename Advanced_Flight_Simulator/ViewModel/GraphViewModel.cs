@@ -41,10 +41,10 @@ namespace Advanced_Flight_Simulator
         */
         public string VM_CorrelatedAttribute
         {
-            get { return model.Correlated_Attribute; }
+            get { return model.CorrelatedAttribute; }
             set
             {
-                model.Correlated_Attribute = value;
+                model.CorrelatedAttribute = value;
             }
         }
 

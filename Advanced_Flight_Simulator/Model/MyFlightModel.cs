@@ -484,7 +484,7 @@ namespace Advanced_Flight_Simulator
             for (; frame < FrameId; frame++)
             {
                 x = float.Parse(info.get_value(frame, GraphAttribute));
-                y = float.Parse(info.get_value(frame, Correlated_Attribute));
+                y = float.Parse(info.get_value(frame, CorrelatedAttribute));
                 pointsList.Add(new DataPoint(x, y));
             }
             return pointsList;
@@ -500,7 +500,7 @@ namespace Advanced_Flight_Simulator
             for (int row = 0; row < RowCount; row++)
             {
                 x = Double.Parse(info.get_value(row, GraphAttribute));
-                y = Double.Parse(info.get_value(row, Correlated_Attribute));
+                y = Double.Parse(info.get_value(row, CorrelatedAttribute));
                 pointsList.Add(new DataPoint(x, y));
             }
             return pointsList;
@@ -700,7 +700,7 @@ namespace Advanced_Flight_Simulator
                 NotifyPropertyChanged("GraphAttribute");
                 new Task(delegate ()
                 {
-                    Correlated_Attribute = getMostCorraltedFeature();
+                    CorrelatedAttribute = getMostCorraltedFeature();
                     updateGraphs();
                     updateLineGraph();
                     if (DllPluged)
@@ -728,7 +728,7 @@ namespace Advanced_Flight_Simulator
                     double x, y;
                     FrameId = int.Parse(value);
                     x = Double.Parse(info.get_value(int.Parse(CurrentAnomaly), GraphAttribute));
-                    y = Double.Parse(info.get_value(int.Parse(CurrentAnomaly), Correlated_Attribute));
+                    y = Double.Parse(info.get_value(int.Parse(CurrentAnomaly), CorrelatedAttribute));
                     List<DataPoint> newPoint = new List<DataPoint>();
                     newPoint.Add(new DataPoint(x, y));
                     AnomalyPoint = newPoint;
@@ -798,14 +798,14 @@ namespace Advanced_Flight_Simulator
             {
                 row = int.Parse(anomaly);
                 x = Double.Parse(getValue(row, GraphAttribute));
-                y = Double.Parse(getValue(row, Correlated_Attribute));
+                y = Double.Parse(getValue(row, CorrelatedAttribute));
                 listAnomalies.Add(new DataPoint(x, y));
             }
             return listAnomalies;
         }
         private void updateAnomalies()
         {
-            if (!String.IsNullOrEmpty(Correlated_Attribute))
+            if (!String.IsNullOrEmpty(CorrelatedAttribute))
             {
                 AnomaliesList = getAnomalyReportByAttribute(GraphAttribute);
                 AnomaliesPoints = getAnomaliesPoints();
@@ -816,7 +816,7 @@ namespace Advanced_Flight_Simulator
         /*
         * Getter and Setter for property Correlated_Attribute.
         */
-        public string Correlated_Attribute
+        public string CorrelatedAttribute
         {
             get
             {
@@ -826,7 +826,7 @@ namespace Advanced_Flight_Simulator
             {
                 correlated_Attribute = value;
                 showCorrelationGraphs = true;
-                NotifyPropertyChanged("Correlated_Attribute");
+                NotifyPropertyChanged("CorrelatedAttribute");
             }
         }
         /*
