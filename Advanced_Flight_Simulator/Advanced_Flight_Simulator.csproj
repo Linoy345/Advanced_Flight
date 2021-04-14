@@ -249,6 +249,17 @@
     <Content Include="bin\x86\Debug\Advanced_Flight_Simulator.pdb" />
     <Content Include="Model\anomalyDetectorDll3.dll" />
     <Content Include="plugins\regressionAlgo.dll" />
+    <Resource Include="Resource\controls\back.png" />
+    <Resource Include="Resource\controls\next.png" />
+    <Resource Include="Resource\controls\pause.png" />
+    <Resource Include="Resource\controls\play.png" />
+    <Resource Include="Resource\controls\stop.png" />
+    <Resource Include="Resource\Indices\airplane.png" />
+    <Resource Include="Resource\Indices\pitch.png" />
+    <Resource Include="Resource\Indices\poi.png" />
+    <Resource Include="Resource\Indices\roll.png" />
+    <Resource Include="Resource\Indices\speed.png" />
+    <Resource Include="Resource\Indices\yaw.png" />
     <Resource Include="View\images\Main_Window_Background.jpg" />
     <Resource Include="bin\Debug\playback_small.xml" />
   </ItemGroup>
