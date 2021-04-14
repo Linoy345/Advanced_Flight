@@ -20,3 +20,7 @@ Operating Instructions
         --generic=socket,in,10,127.0.0.1,5400,tcp,playback_small--fdm=null
     3.	Open a csv file that represent a flight and run it.
     4.	Enjoy.
+
+
+Video explanation:
+    https://drive.google.com/file/d/1Y0b9tuXXTkTsgThk6Xp6rkBP5OgCk5qx/view?usp=sharing
