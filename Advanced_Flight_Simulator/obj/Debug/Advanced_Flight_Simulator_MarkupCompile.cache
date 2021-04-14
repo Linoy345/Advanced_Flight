@@ -4,28 +4,16 @@
 winexe
 C#
 .cs
-<<<<<<< HEAD
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\obj\Debug\
-=======
-C:\Users\אורעד\Source\Repos\yair2121\Advanced_Flight11\Advanced_Flight_Simulator\obj\Debug\
->>>>>>> 37cdaad2661ac68e541b7728be3127ffe42214d2
 Advanced_Flight_Simulator
 none
 false
 TRACE
-<<<<<<< HEAD
 C:\Users\adamp\Source\Repos\Advanced_Flight\Advanced_Flight_Simulator\App.xaml
 6-983723368
 51481486042
 22-1199647415
 22-403727767
-=======
-C:\Users\אורעד\Source\Repos\yair2121\Advanced_Flight11\Advanced_Flight_Simulator\App.xaml
-6-983723368
-51481486042
-201339087455
-20-1676980261
->>>>>>> 37cdaad2661ac68e541b7728be3127ffe42214d2
 View\controls.xaml;View\GraphView.xaml;View\Indices.xaml;View\Joistic.xaml;MainWindow.xaml;View\DisplayWindow.xaml;
 
 False

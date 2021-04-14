@@ -31,9 +31,9 @@
             <Image x:Name="stop"  MouseLeftButtonUp="stop_MouseLeftButtonUp" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="images/stop.png" />
             <Image x:Name="next" MouseLeftButtonUp="next_MouseLeftButtonUp" Grid.Row="0" Grid.Column="4" HorizontalAlignment="Center" Height="100" VerticalAlignment="Top" Width="100" Source="images/next.png" />
 
-            <StackPanel  Grid.Row="0" Grid.Column="5" Margin="0.4,12,-0.4,6.4" Grid.RowSpan="2">
-                <TextBlock Grid.Row="0" Grid.Column="6" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top">Play Speed:</TextBlock>
-                <ComboBox Margin="10" SelectedIndex="2" SelectedItem="{Binding VM_Frequency, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120">
+            <StackPanel  Grid.Row="0" Grid.Column="5" Margin="0,0,0,80" Grid.RowSpan="2">
+                <TextBlock Grid.Row="0" Grid.Column="6"  Margin="0,0,0,0" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="25">Play Speed:</TextBlock>
+                <ComboBox Margin="10" SelectedIndex="2" SelectedItem="{Binding VM_Frequency, Mode=TwoWay}" HorizontalAlignment="Center" VerticalAlignment="Top" Width="120" FontSize="25">
                     <ComboBox.ItemsSource>
                         <x:Array Type="{x:Type sys:Double}">
                             <sys:Double>0.25</sys:Double>
@@ -46,10 +46,10 @@
                 </ComboBox>
             </StackPanel>
 
-            <TextBlock x:Name="time" Text="{Binding VM_FrameId}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Grid.Row="0" Grid.Column="6" TextWrapping="Wrap" FontSize="16"/>
+            <TextBlock x:Name="time" Margin="0,0,0,40" Text="{Binding VM_FrameId}" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1" Grid.Column="6" TextWrapping="Wrap" FontSize="25"/>
 
 
-            <Slider x:Name="slider" Minimum="0" Maximum= "{Binding VM_RowCount}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" Width="800" Grid.ColumnSpan="6" Value="{Binding VM_FrameId}"/>
+            <Slider x:Name="slider" Minimum="0" Maximum= "{Binding VM_RowCount}" Grid.Row="1" Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Bottom" Width="800" Grid.ColumnSpan="6" Value="{Binding VM_FrameId}"/>
 
 
         </Grid>
