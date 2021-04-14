@@ -10,6 +10,9 @@ using System.Runtime.InteropServices;
 
 namespace Advanced_Flight_Simulator
 {
+    /***
+    * Load dll algorithm
+    ***/
     class LoadDll
     {
 
@@ -48,6 +51,9 @@ namespace Advanced_Flight_Simulator
 
         private Flight_Info flight_Info;
 
+        /***
+        * Constructor for load dll
+        ***/
         public LoadDll(string dllPath, string fileName, Flight_Info flight_Info)
         {
             ptrDll = NativeMethods.LoadLibrary(@dllPath);
@@ -67,6 +73,9 @@ namespace Advanced_Flight_Simulator
             this.flight_Info = flight_Info;
             setAnomalyReport();
         }
+        /***
+        * Set the anomaly report
+        ***/
         private void setAnomalyReport()
         {
             anomalyRepor = new Dictionary<string, List<string>>();
@@ -118,16 +127,26 @@ namespace Advanced_Flight_Simulator
 
         }
 
+        /***
+        * Get anomaly report by att
+        ***/
         public List<string> getAnomalyReportByAttribute(string att)
         {
             return anomalyRepor[att];
         }
 
+
+        /***
+        * Free the dll memory
+        ***/
         public void freeDll()
         {
             bool result = NativeMethods.FreeLibrary(ptrDll);
         }
 
+        /***
+        * Convert the IntPtr to string
+        ***/
         private static string intPtrToString(IntPtr intPtr)
         {
             string s = "";
