@@ -6,7 +6,7 @@ Welcome to our FlightGear Application!
     Our program is based on the MVVM (Model, View and View Model) design pattern. 
     Acorrding to MVVM rules, we created 3 main folders for the Model, View and View Model. The Modle responsible on the logic of our           program, the View is responsible to display our program and the ViewModel create the connection between the model and the view.
     Moreover, our program can represent and detect deviation in the flight by using dll. The dll is on our program from the previous           semester. we show this information by graph, therefore you need to install "oxyplot". 
-    The main Classes in our program is the MyFlightModel that in the Model folder, which has all the logic and run the program. The             FlightViewModel in the ViewModle folder and the displayWindow in the View folder which show the main information in our project.
+    The main Classes in our program are the MyFlightModel that in the Model folder, which has all the logic and run the program. The             FlightViewModel in the ViewModle folder and the displayWindow in the View folder which show the main information in our project.
     For more information on the classes and functions, see the documentation in the code.
     
 Operating Instructions
