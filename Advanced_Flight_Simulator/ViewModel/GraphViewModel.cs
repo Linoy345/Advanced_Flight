@@ -88,7 +88,9 @@ namespace Advanced_Flight_Simulator
                 return model.AttributesGraph;
             }
         }
-
+        /*
+        * Getter for property VM_LatestPoints.
+        */
         public List<DataPoint> VM_LatestPoints
         {
             get
