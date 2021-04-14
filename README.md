@@ -22,5 +22,5 @@ Operating Instructions
     4.	Enjoy.
 
 
-Video explanation:
+Video explanation all user stories:
     https://drive.google.com/file/d/1Y0b9tuXXTkTsgThk6Xp6rkBP5OgCk5qx/view?usp=sharing
